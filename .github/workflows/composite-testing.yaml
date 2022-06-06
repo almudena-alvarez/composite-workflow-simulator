@@ -25,5 +25,8 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: echo "https://github.com/$FIRST_SECRET"
+      - run: echo "https://www.$FIRST_SECRET.es/"
+      - id: karate
+        shell: bash
+        run: ${{ github.action_path }}/script.sh
 
