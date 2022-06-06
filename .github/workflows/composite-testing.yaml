@@ -27,7 +27,7 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - run: echo "https://www.$FIRST_SECRET.es/"
       - run: echo "${{ github.action_path }}/script.sh"
-#       - id: karate
-#         shell: bash
-#         run: ${{ github.action_path }}/script.sh
+      - id: karate
+        shell: bash
+        run: ${{ github.action_path }}/script.sh
 
