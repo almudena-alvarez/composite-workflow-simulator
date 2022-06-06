@@ -27,6 +27,6 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - run: echo "https://www.$FIRST_SECRET.es/"
       - name: script
-        run: PATH/thisisascript.sh
+        run: /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
         shell: bash
 
