@@ -9,7 +9,6 @@ on:
 
 jobs:
   build:
-    name: check schemas in database
     runs-on: ubuntu-latest
   
     steps:
