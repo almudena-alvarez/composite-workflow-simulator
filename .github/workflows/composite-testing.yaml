@@ -29,5 +29,6 @@ jobs:
       - name: script
         run: |
           chmod +x /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
+          sh /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
         shell: bash
 
