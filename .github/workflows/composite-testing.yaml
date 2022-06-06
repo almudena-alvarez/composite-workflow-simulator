@@ -3,8 +3,8 @@ name: Karate test
 on:
   workflow_call:
     secrets:
-    FIRST_SECRET:
-      required: true
+      FIRST_SECRET:
+        required: true
 
 
 jobs:
@@ -13,10 +13,6 @@ jobs:
     runs-on: ubuntu-latest
   
     steps:
-      - name: Check testing
-        id: check-testing
-        uses: ./.github/actions/action
-
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
