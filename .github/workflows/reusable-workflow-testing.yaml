@@ -25,6 +25,4 @@ jobs:
         uses: ./.github/actions/database
         with:
           FIRST_SECRET: ${{ secrets.FIRST_SECRET }}
-          repository: oasis-cib
-          version: ${{ steps.define-version.outputs.build_version }}
 
