@@ -1,34 +1,76 @@
 name: Karate test
 
 on:
-  workflow_call:
-    secrets:
-      FIRST_SECRET:
-        required: true
-
+  workflow_dispatch:
 
 jobs:
   build:
-    name: this is the name
+    name: workflow repo
     runs-on: ubuntu-latest
   
     steps:
-      - run: echo "hola ha funcionado"
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
+        uses: actions/checkout@v3
+
+      - name: 1List files in the repository
+        shell: bash
         run: |
           ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: echo "https://www.$FIRST_SECRET.es/"
-      - name: script
-        run: |
-          chmod +x /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
-          sh /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
+          
+      - name: Checkout karate repo
+        uses: actions/checkout@v3
+        with:
+          repository: almudena-alvarez/karate-simulator@main
+          
+      - name: 2List files in the repository
         shell: bash
+        run: |
+          ls ${{ github.workspace }}
+
+          
+      - name: 2List files in the repository
+        shell: bash
+        run: |
+          ls ${{ github.workspace }}/main
+          
+          
+#       - name: 3List files in the repository
+#         shell: bash
+#         run: |
+#           ls -l main
+#           dir
+#       - run: echo "https://www.$FIRST_SECRET.es/"
+#       - name: script
+#         run: |
+#           chmod +x /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
+#           sh /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
+#         shell: bash
+#       - name: Checkout tools repo
+#         uses: actions/checkout@v3
+#         with:
+#           repository: almudena-alvarez/composite-workflow-simulator
+#           path: /.github
+          
+#       - name: 4List files in the repository
+#         shell: bash
+#         run: |
+#           ls ${{ github.workspace }}
+#       - name: 5List files in the repository
+#         shell: bash
+#         run: |
+#           ls ${{ github.workspace }}/actions
+#       - name: 5List files in the repository
+#         shell: bash
+#         run: |
+#           ls ${{ github.workspace }}/actions/database
+#       - name: 6List files in the repository
+#         shell: bash
+#         run: |
+#           ls -l
+#           dir
+#       - name: check composite
+#         id: composite
+#         uses: ./composite/.github/actions/database
+#         with:
+#           FIRST_SECRET: ${{ secrets.FIRST_SECRET }}
 
