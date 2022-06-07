@@ -1,11 +1,7 @@
 name: Karate test
 
 on:
-  workflow_call:
-    secrets:
-      FIRST_SECRET:
-        required: true
-
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,49 +17,60 @@ jobs:
         run: |
           ls ${{ github.workspace }}
           
+      - name: Checkout karate repo
+        uses: actions/checkout@v3
+        with:
+          repository: almudena-alvarez/karate-simulator@main
+          
+      - name: 2List files in the repository
+        shell: bash
+        run: |
+          ls ${{ github.workspace }}
+
+          
       - name: 2List files in the repository
         shell: bash
         run: |
           ls ${{ github.workspace }}/main
           
           
-      - name: 3List files in the repository
-        shell: bash
-        run: |
-          ls -l main
-          dir
+#       - name: 3List files in the repository
+#         shell: bash
+#         run: |
+#           ls -l main
+#           dir
 #       - run: echo "https://www.$FIRST_SECRET.es/"
 #       - name: script
 #         run: |
 #           chmod +x /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
 #           sh /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
 #         shell: bash
-      - name: Checkout tools repo
-        uses: actions/checkout@v3
-        with:
-          repository: almudena-alvarez/composite-workflow-simulator
-          path: /.github
+#       - name: Checkout tools repo
+#         uses: actions/checkout@v3
+#         with:
+#           repository: almudena-alvarez/composite-workflow-simulator
+#           path: /.github
           
-      - name: 4List files in the repository
-        shell: bash
-        run: |
-          ls ${{ github.workspace }}
-      - name: 5List files in the repository
-        shell: bash
-        run: |
-          ls ${{ github.workspace }}/actions
-      - name: 5List files in the repository
-        shell: bash
-        run: |
-          ls ${{ github.workspace }}/actions/database
-      - name: 6List files in the repository
-        shell: bash
-        run: |
-          ls -l
-          dir
-      - name: check composite
-        id: composite
-        uses: ./composite/.github/actions/database
-        with:
-          FIRST_SECRET: ${{ secrets.FIRST_SECRET }}
+#       - name: 4List files in the repository
+#         shell: bash
+#         run: |
+#           ls ${{ github.workspace }}
+#       - name: 5List files in the repository
+#         shell: bash
+#         run: |
+#           ls ${{ github.workspace }}/actions
+#       - name: 5List files in the repository
+#         shell: bash
+#         run: |
+#           ls ${{ github.workspace }}/actions/database
+#       - name: 6List files in the repository
+#         shell: bash
+#         run: |
+#           ls -l
+#           dir
+#       - name: check composite
+#         id: composite
+#         uses: ./composite/.github/actions/database
+#         with:
+#           FIRST_SECRET: ${{ secrets.FIRST_SECRET }}
 
