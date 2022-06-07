@@ -35,7 +35,7 @@ jobs:
       - name: 1List files in the repository
         shell: bash
         run: |
-          ls -l ${{ github.workspace }}/wworkflow
+          ls -l ${{ github.workspace }}/wworkflow/.github/actions/database
 
 #       - run: echo "https://www.$FIRST_SECRET.es/"
 #       - name: script
