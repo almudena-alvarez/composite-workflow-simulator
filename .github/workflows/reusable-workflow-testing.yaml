@@ -15,9 +15,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-        with:
-          path: main
-          
+
       - name: 1List files in the repository
         shell: bash
         run: |
