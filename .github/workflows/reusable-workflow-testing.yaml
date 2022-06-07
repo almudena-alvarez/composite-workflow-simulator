@@ -16,11 +16,11 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - run: echo "https://www.$FIRST_SECRET.es/"
-      - name: script
-        run: |
-          chmod +x /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
-          sh /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
-        shell: bash
+#       - name: script
+#         run: |
+#           chmod +x /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
+#           sh /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
+#         shell: bash
       - name: check composite
         id: composite
         uses: ./.github/actions/database
