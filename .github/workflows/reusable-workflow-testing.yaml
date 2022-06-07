@@ -38,11 +38,11 @@ jobs:
           ls -l ${{ github.workspace }}/wworkflow/.github/actions/database
 
 #       - run: echo "https://www.$FIRST_SECRET.es/"
-#       - name: script
-#         run: |
-#           chmod +x /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
-#           sh /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
-#         shell: bash
+      - name: script
+        run: |
+          chmod +x ${{ github.workspace }}/wworkflow/.github/actions/database/executablescript.sh
+          sh ${{ github.workspace }}/wworkflow/.github/actions/database/executablescript.sh
+        shell: bash
 #       - name: Checkout tools repo
 #         uses: actions/checkout@v3
 #         with:
