@@ -17,20 +17,22 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: main
-      - name: List files in the repository
+          
+      - name: 1List files in the repository
         shell: bash
         run: |
           ls ${{ github.workspace }}
-      - name: List files in the repository
+          
+      - name: 2List files in the repository
         shell: bash
         run: |
           ls ${{ github.workspace }}/main
           
           
-      - name: List files in the repository
+      - name: 3List files in the repository
         shell: bash
         run: |
-          ls -l
+          ls -l main
           dir
 #       - run: echo "https://www.$FIRST_SECRET.es/"
 #       - name: script
@@ -44,15 +46,15 @@ jobs:
           repository: almudena-alvarez/composite-workflow-simulator
           path: composite
           
-      - name: List files in the repository
+      - name: 4List files in the repository
         shell: bash
         run: |
           ls ${{ github.workspace }}
-      - name: List files in the repository
+      - name: 5List files in the repository
         shell: bash
         run: |
-          ls ${{ github.workspace }}/composite
-      - name: List files in the repository
+          ls ${{ github.workspace }}/composite/.github
+      - name: 6List files in the repository
         shell: bash
         run: |
           ls -l
