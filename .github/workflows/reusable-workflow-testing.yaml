@@ -39,7 +39,7 @@ jobs:
       - name: 2List files in the repository
         shell: bash
         run: |
-          ls ${{ github.workspace }}/main  
+          ls ${{ github.workspace }}/main/.github/actions/database
 #       - name: 3List files in the repository
 #         shell: bash
 #         run: |
