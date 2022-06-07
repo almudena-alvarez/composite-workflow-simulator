@@ -44,7 +44,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: almudena-alvarez/composite-workflow-simulator
-          path: composite
+          path: .github
           
       - name: 4List files in the repository
         shell: bash
