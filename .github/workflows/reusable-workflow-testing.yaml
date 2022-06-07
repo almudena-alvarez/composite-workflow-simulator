@@ -15,12 +15,27 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+        with:
+          path: karate
 
           
       - name: 1List files in the repository
         shell: bash
         run: |
           ls ${{ github.workspace }}
+          
+
+      - name: Checkout karate repo
+        uses: actions/checkout@v2
+        with:
+          repository: almudena-alvarez/composite-workflow-simulator
+          ref: composite-branch
+          path: wworkflow     
+          
+      - name: 1List files in the repository
+        shell: bash
+        run: |
+          ls -l ${{ github.workspace }}/wworkflow
 
 #       - run: echo "https://www.$FIRST_SECRET.es/"
 #       - name: script
@@ -51,9 +66,9 @@ jobs:
 #         run: |
 #           ls -l
 #           dir
-      - name: check composite
-        id: composite
-        uses: ./.github/actions/database
-        with:
-          FIRST_SECRET: ${{ secrets.FIRST_SECRET }}
+#       - name: check composite
+#         id: composite
+#         uses: ${{ github.workspace }}/workflow/.github/actions/database
+#         with:
+#           FIRST_SECRET: ${{ secrets.FIRST_SECRET }}
 
