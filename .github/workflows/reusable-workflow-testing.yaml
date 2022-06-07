@@ -53,7 +53,11 @@ jobs:
       - name: 5List files in the repository
         shell: bash
         run: |
-          ls ${{ github.workspace }}/composite/.github/workflows
+          ls ${{ github.workspace }}/composite/.github/actions
+      - name: 5List files in the repository
+        shell: bash
+        run: |
+          ls ${{ github.workspace }}/composite/.github/actions/database
       - name: 6List files in the repository
         shell: bash
         run: |
