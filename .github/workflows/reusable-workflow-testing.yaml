@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: this is the name
+    name: workflow repo
     runs-on: ubuntu-latest
   
     steps:
@@ -17,12 +17,27 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: main
-      - run: echo "https://www.$FIRST_SECRET.es/"
-      - name: script
-        run: |
-          chmod +x /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
-          sh /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
+      - name: List files in the repository
         shell: bash
+        run: |
+          ls ${{ github.workspace }}
+      - name: List files in the repository
+        shell: bash
+        run: |
+          ls ${{ github.workspace }}/main
+          
+          
+      - name: List files in the repository
+        shell: bash
+        run: |
+          ls -l
+          dir
+#       - run: echo "https://www.$FIRST_SECRET.es/"
+#       - name: script
+#         run: |
+#           chmod +x /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
+#           sh /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
+#         shell: bash
       - name: Checkout tools repo
         uses: actions/checkout@v3
         with:
