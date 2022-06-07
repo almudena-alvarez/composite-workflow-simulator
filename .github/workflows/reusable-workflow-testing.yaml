@@ -20,7 +20,7 @@ jobs:
       - name: Checkout karate repo
         uses: actions/checkout@v3
         with:
-          repository: almudena-alvarez/karate-simulator@main
+          repository: almudena-alvarez/karate-simulator
           
       - name: 2List files in the repository
         shell: bash
