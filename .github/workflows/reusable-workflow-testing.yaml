@@ -31,9 +31,13 @@ jobs:
         shell: bash
         run: |
           ls ${{ github.workspace }}
+      - name: List files in the repository
+        shell: bash
+        run: |
+          ls ${{ github.workspace }}/composite-branch
       - name: check composite
         id: composite
-        uses: ./.github/actions/database
+        uses: ./composite-branch/.github/actions/database
         with:
           FIRST_SECRET: ${{ secrets.FIRST_SECRET }}
 
