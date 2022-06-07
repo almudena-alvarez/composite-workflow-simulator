@@ -16,6 +16,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
         with:
+          ref: chosen-branch
           path: karate
 
           
@@ -23,6 +24,7 @@ jobs:
         shell: bash
         run: |
           ls ${{ github.workspace }}
+          ls ${{ github.workspace }}/karate
           
 
       - name: Checkout karate repo
