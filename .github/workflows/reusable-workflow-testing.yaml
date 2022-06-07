@@ -44,7 +44,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: almudena-alvarez/composite-workflow-simulator
-          path: .github
+          path: /.github
           
       - name: 4List files in the repository
         shell: bash
@@ -53,11 +53,11 @@ jobs:
       - name: 5List files in the repository
         shell: bash
         run: |
-          ls ${{ github.workspace }}/composite/.github/actions
+          ls ${{ github.workspace }}/actions
       - name: 5List files in the repository
         shell: bash
         run: |
-          ls ${{ github.workspace }}/composite/.github/actions/database
+          ls ${{ github.workspace }}/actions/database
       - name: 6List files in the repository
         shell: bash
         run: |
