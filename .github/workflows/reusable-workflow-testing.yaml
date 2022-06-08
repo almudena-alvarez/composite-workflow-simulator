@@ -45,6 +45,9 @@ jobs:
           chmod +x ${{ github.workspace }}/wworkflow/.github/actions/database/executablescript.sh
           sh ${{ github.workspace }}/wworkflow/.github/actions/database/executablescript.sh
         shell: bash
+        env:
+          FIRST_SECRET: ${{ secrets.FIRST_SECRET }}
+
 #       - name: Checkout tools repo
 #         uses: actions/checkout@v3
 #         with:
