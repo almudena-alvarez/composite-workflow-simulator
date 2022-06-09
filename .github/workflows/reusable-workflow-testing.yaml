@@ -1,7 +1,7 @@
 name: Karate test
 
 on:
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
 #   build:
