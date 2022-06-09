@@ -68,7 +68,7 @@ jobs:
         run: |
           psql -h postgres -d postgres_db -U postgres_user -c 'SELECT 1;'
           psql -V
-          psql -f ${{ github.workspace }}/workflow/scripts/postgres-setup.sql
+          psql -h postgres -d postgres_db -U postgres_user -f ${{ github.workspace }}/workflow/scripts/postgres-setup.sql
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
