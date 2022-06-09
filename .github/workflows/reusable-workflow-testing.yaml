@@ -56,42 +56,46 @@ jobs:
       - name: List files in the workspace
         shell: bash
         run: pwd
-          
+      
       - name: List files in the workspace
         shell: bash
-        run: ls -a
-        working-directory: ${{ github.workspace }}
+        run: ls -a /__w/karate-simulator/karate-simulator
           
-      - name: List files in the workspace
-        shell: bash
-        run: ls -a
-        working-directory: ${{ github.workspace }}/karate
+#       - name: List files in the workspace
+#         shell: bash
+#         run: ls -a
+#         working-directory: ${{ github.workspace }}
           
-      - name: List files in karate repository
-        shell: bash
-        run: ls -a
-        working-directory: ${{ github.workspace }}/workflow
+#       - name: List files in the workspace
+#         shell: bash
+#         run: ls -a
+#         working-directory: ${{ github.workspace }}/karate
+          
+#       - name: List files in karate repository
+#         shell: bash
+#         run: ls -a
+#         working-directory: ${{ github.workspace }}/workflow
 
           
-      - name: List files in karate repository
-        shell: bash
-        run: ls -a
-        working-directory: ${{ github.workspace }}/workflow/scripts
+#       - name: List files in karate repository
+#         shell: bash
+#         run: ls -a
+#         working-directory: ${{ github.workspace }}/workflow/scripts
 
-      - name: Install PostgreSQL client
-        run: |
-          apt-get update
-          apt-get install --yes postgresql-client
+#       - name: Install PostgreSQL client
+#         run: |
+#           apt-get update
+#           apt-get install --yes postgresql-client
 
-      # queries database with postgres client
-      - name: Query database
-        run: |
-          psql -h postgres -d postgres_db -U postgres_user -c 'SELECT 1;'
-          psql -V
-          psql -h postgres -d postgres_db -U postgres_user -f ${{ github.workspace }}/workflow/scripts/postgres-setup.sql
-        env:
-          # postgress password is required; alternatively, you can run:
-          # `PGPASSWORD=postgres_password psql ...`
-          PGPASSWORD: postgres_password
+#       # queries database with postgres client
+#       - name: Query database
+#         run: |
+#           psql -h postgres -d postgres_db -U postgres_user -c 'SELECT 1;'
+#           psql -V
+#           psql -h postgres -d postgres_db -U postgres_user -f ${{ github.workspace }}/workflow/scripts/postgres-setup.sql
+#         env:
+#           # postgress password is required; alternatively, you can run:
+#           # `PGPASSWORD=postgres_password psql ...`
+#           PGPASSWORD: postgres_password
 
 
