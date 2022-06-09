@@ -67,7 +67,6 @@ jobs:
       - name: Query database
         run: |
           psql -h postgres -d postgres_db -U postgres_user -c 'SELECT 1;'
-          service postgresql status
           psql -V
           psql -f ${{ github.workspace }}/workflow/scripts/postgres-setup.sql
         env:
