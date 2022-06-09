@@ -50,9 +50,7 @@ jobs:
 
     steps:
     
-      - name: check where i am
-        run: |
-          ls -a ${{ github.workspace }}
+
 
       - name: Install PostgreSQL client
         run: |
@@ -67,6 +65,4 @@ jobs:
           # `PGPASSWORD=postgres_password psql ...`
           PGPASSWORD: postgres_password
 
-      - name: check where i am
-        run: |
-          ls -a ${{ github.workspace }}
+
