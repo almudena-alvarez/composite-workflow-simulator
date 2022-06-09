@@ -1,1 +1,2 @@
-SELECT *;
+\dn;
+\dt;
