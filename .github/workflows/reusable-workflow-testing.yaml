@@ -55,24 +55,28 @@ jobs:
           
       - name: List files in the workspace
         shell: bash
-        run: |
-          ls ${{ github.workspace }}
+        run: pwd
           
       - name: List files in the workspace
         shell: bash
-        run: |
-          ls ${{ github.workspace }}/karate
+        run: ls -a
+        working-directory: ${{ github.workspace }}
+          
+      - name: List files in the workspace
+        shell: bash
+        run: ls -a
+        working-directory: ${{ github.workspace }}/karate
           
       - name: List files in karate repository
         shell: bash
-        run: |
-          ls ${{ github.workspace }}/workflow
+        run: ls -a
+        working-directory: ${{ github.workspace }}/workflow
 
           
       - name: List files in karate repository
         shell: bash
-        run: |
-          ls ${{ github.workspace }}/workflow/scripts
+        run: ls -a
+        working-directory: ${{ github.workspace }}/workflow/scripts
 
       - name: Install PostgreSQL client
         run: |
