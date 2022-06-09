@@ -5,23 +5,6 @@ on:
 
 jobs:
 
-  build:
-    name: workflow repo
-    runs-on: ubuntu-latest
-  
-    steps:
-      - name: Checkout karate repository
-        uses: actions/checkout@v2
-        with:
-          path: karate
-
-      - name: Checkout workflow repo
-        uses: actions/checkout@v2
-        with:
-          repository: almudena-alvarez/composite-workflow-simulator
-          ref: main
-          path: workflow  
-
   # label of the container job
   postgres-job:
     # containers must run in Linux based operating systems
@@ -57,6 +40,39 @@ jobs:
           --health-retries 5
 
     steps:
+    
+      - name: Checkout karate repository
+        uses: actions/checkout@v2
+        with:
+          path: karate
+
+      - name: Checkout workflow repo
+        uses: actions/checkout@v2
+        with:
+          repository: almudena-alvarez/composite-workflow-simulator
+          ref: main
+          path: workflow  
+          
+      - name: List files in the workspace
+        shell: bash
+        run: |
+          ls ${{ github.workspace }}
+          
+      - name: List files in the workspace
+        shell: bash
+        run: |
+          ls ${{ github.workspace }}/karate
+          
+      - name: List files in karate repository
+        shell: bash
+        run: |
+          ls ${{ github.workspace }}/workflow
+
+          
+      - name: List files in karate repository
+        shell: bash
+        run: |
+          ls ${{ github.workspace }}/workflow/scripts
 
       - name: Install PostgreSQL client
         run: |
