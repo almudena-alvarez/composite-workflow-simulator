@@ -1,0 +1,127 @@
+name: Karate test
+
+on:
+  workflow_call:
+
+jobs:
+
+  # label of the container job
+  postgres-job:
+    # containers must run in Linux based operating systems
+    runs-on: ubuntu-latest
+    # Docker Hub image that `postgres-job` executes in
+    container: node:latest
+
+    # service containers to run with `postgres-job`
+    services:
+      # label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:latest
+        # service environment variables
+        # `POSTGRES_HOST` is `postgres`
+        env:
+          # optional (defaults to `postgres`)
+          POSTGRES_DB: postgres_db
+          # required
+          POSTGRES_PASSWORD: postgres_password
+          # optional (defaults to `5432`)
+          POSTGRES_PORT: 5432
+          # optional (defaults to `postgres`)
+          POSTGRES_USER: postgres_user
+        ports:
+          # maps tcp port 5432 on service container to the host
+          - 5432:5432
+        # set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+    
+      - name: Checkout karate repository
+        uses: actions/checkout@v2
+        with:
+          path: karate
+
+      - name: Checkout workflow repo
+        uses: actions/checkout@v2
+        with:
+          repository: almudena-alvarez/composite-workflow-simulator
+          ref: main
+          path: workflow  
+          
+      - name: List files in the workspace
+        shell: bash
+        run: pwd
+      
+      - name: List files in the workspace
+        shell: bash
+        run: ls -a /__w/karate-simulator/karate-simulator
+          
+
+      - name: Install PostgreSQL client
+        run: |
+          apt-get update
+          apt-get install --yes postgresql-client
+      # queries database with postgres client
+      - name: Query database
+        run: |
+          psql -h postgres -d postgres_db -U postgres_user -c 'SELECT 1;'
+          psql -V
+          psql -h postgres -d postgres_db -U postgres_user -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-setup.sql
+        env:
+          # postgress password is required; alternatively, you can run:
+          # `PGPASSWORD=postgres_password psql ...`
+          PGPASSWORD: postgres_password
+          
+       
+
+      - name: backup tables
+        shell: bash
+        run: |
+          PGSSLMODE=allow PGPASSWORD='postgres' winpty ./pg_dump \
+          --file ./backup \
+          --host "$HOST" \
+          --port "5432" \
+          --username "$POSTGRES_USER" \
+          --verbose \
+          --no-owner \
+          --no-privileges \
+          --format=c \
+          --blobs \
+          --encoding "UTF8" \
+          --table "esq_oasis_onboarding.domain" \
+          --table "esq_oasis_onboarding.domain" \
+          --table "esq_oasis_onboarding.domain" \
+          --table "esq_oasis_onboarding.domain" \
+          --table "esq_oasis_onboarding.domain" \
+          "pdoasis"
+
+
+      - name: backup tables
+        shell: bash
+        run: |
+          ./pg_restore.exe --host "$HOST" --port "5432" --username "$POSTGRES_USER" --dbname "$DATABASE" --verbose -n "esq_oasis_onboarding" "./backups/domain-10062022"
+
+        env:
+          # postgress password is required; alternatively, you can run:
+          # `PGPASSWORD=postgres_password psql ...`
+          HOST: ${{ secrets.HOST }}
+          DATABASE: ${{ secrets.DATABASE }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          PORT: ${{secrets.PORT}}
+
+      - name: setup postgres database
+        run: |
+          PGPASSWORD=$POSTGRES_PASSWORD psql -h $HOST -d $DATABASE -U $POSTGRES_USER -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-setup.sql
+        env:
+          # postgress password is required; alternatively, you can run:
+          # `PGPASSWORD=postgres_password psql ...`
+          HOST: ${{ secrets.HOST }}
+          DATABASE: ${{ secrets.DATABASE }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          PORT: ${{secrets.PORT}}
