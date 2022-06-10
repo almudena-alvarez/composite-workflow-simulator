@@ -1,2 +1,1 @@
-\dn;
-\dt;
+CREATE SCHEMA esq_oasis_onboarding AUTHORIZATION postgres_user;
