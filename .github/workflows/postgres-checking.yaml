@@ -68,9 +68,9 @@ jobs:
       # queries database with postgres client
       - name: Query database
         run: |
-          psql -h postgres -d postgres_db -U postgres_user -c 'SELECT 1;'
-          psql -V
           psql -h postgres -d postgres_db -U postgres_user -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-setup.sql
+          psql \dn
+          psql \dt esq_oasis.*
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
@@ -78,50 +78,50 @@ jobs:
           
        
 
-      - name: backup tables
-        shell: bash
-        run: |
-          PGSSLMODE=allow PGPASSWORD='postgres' winpty ./pg_dump \
-          --file ./backup \
-          --host "$HOST" \
-          --port "5432" \
-          --username "$POSTGRES_USER" \
-          --verbose \
-          --no-owner \
-          --no-privileges \
-          --format=c \
-          --blobs \
-          --encoding "UTF8" \
-          --table "esq_oasis_onboarding.domain" \
-          --table "esq_oasis_onboarding.domain" \
-          --table "esq_oasis_onboarding.domain" \
-          --table "esq_oasis_onboarding.domain" \
-          --table "esq_oasis_onboarding.domain" \
-          "pdoasis"
+#       - name: backup tables
+#         shell: bash
+#         run: |
+#           PGSSLMODE=allow PGPASSWORD='postgres_password' winpty ./pg_dump \
+#           --file ./backup \
+#           --host "$HOST" \
+#           --port "5432" \
+#           --username "$POSTGRES_USER" \
+#           --verbose \
+#           --no-owner \
+#           --no-privileges \
+#           --format=c \
+#           --blobs \
+#           --encoding "UTF8" \
+#           --table "esq_oasis_onboarding.domain" \
+#           --table "esq_oasis_onboarding.domain" \
+#           --table "esq_oasis_onboarding.domain" \
+#           --table "esq_oasis_onboarding.domain" \
+#           --table "esq_oasis_onboarding.domain" \
+#           "pdoasis"
 
 
-      - name: backup tables
-        shell: bash
-        run: |
-          ./pg_restore.exe --host "$HOST" --port "5432" --username "$POSTGRES_USER" --dbname "$DATABASE" --verbose -n "esq_oasis_onboarding" "./backups/domain-10062022"
+#       - name: backup tables
+#         shell: bash
+#         run: |
+#           ./pg_restore.exe --host "$HOST" --port "5432" --username "$POSTGRES_USER" --dbname "$DATABASE" --verbose -n "esq_oasis_onboarding" "./backups/domain-10062022"
 
-        env:
-          # postgress password is required; alternatively, you can run:
-          # `PGPASSWORD=postgres_password psql ...`
-          HOST: ${{ secrets.HOST }}
-          DATABASE: ${{ secrets.DATABASE }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          PORT: ${{secrets.PORT}}
+#         env:
+#           # postgress password is required; alternatively, you can run:
+#           # `PGPASSWORD=postgres_password psql ...`
+#           HOST: ${{ secrets.HOST }}
+#           DATABASE: ${{ secrets.DATABASE }}
+#           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+#           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+#           PORT: ${{secrets.PORT}}
 
-      - name: setup postgres database
-        run: |
-          PGPASSWORD=$POSTGRES_PASSWORD psql -h $HOST -d $DATABASE -U $POSTGRES_USER -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-setup.sql
-        env:
-          # postgress password is required; alternatively, you can run:
-          # `PGPASSWORD=postgres_password psql ...`
-          HOST: ${{ secrets.HOST }}
-          DATABASE: ${{ secrets.DATABASE }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          PORT: ${{secrets.PORT}}
+#       - name: setup postgres database
+#         run: |
+#           PGPASSWORD=$POSTGRES_PASSWORD psql -h $HOST -d $DATABASE -U $POSTGRES_USER -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-setup.sql
+#         env:
+#           # postgress password is required; alternatively, you can run:
+#           # `PGPASSWORD=postgres_password psql ...`
+#           HOST: ${{ secrets.HOST }}
+#           DATABASE: ${{ secrets.DATABASE }}
+#           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+#           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+#           PORT: ${{secrets.PORT}}
