@@ -38,3 +38,7 @@ INSERT INTO esq_oasis.third VALUES
 (0, 'as', 'as', 'as@as.com'),
 (1, 'bc', 'bc', 'bc@bc.com'),
 (2, 'df', 'df', 'df@df.com');
+
+
+\dn
+\dt esq_oasis.*
