@@ -81,7 +81,7 @@ jobs:
         shell: bash
         run: |
           pwd
-          PGSSLMODE=allow PGPASSWORD='postgres_password' winpty pg_dump \
+          PGSSLMODE=allow PGPASSWORD='postgres_password' pg_dump \
           --file ./backup \
           --host "postgres" \
           --username "postgres_user" \
