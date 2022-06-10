@@ -69,8 +69,6 @@ jobs:
       - name: Query database
         run: |
           psql -h postgres -d postgres_db -U postgres_user -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-setup.sql
-          psql \dn
-          psql \dt esq_oasis.*
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
