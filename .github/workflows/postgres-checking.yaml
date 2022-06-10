@@ -66,42 +66,46 @@ jobs:
           apt-get update
           apt-get install --yes postgresql-client
       # queries database with postgres client
-      - name: Query database
+      
+      
+      - name: set ddbb as in oasis
         run: |
           psql -h postgres -d postgres_db -U postgres_user -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-setup.sql
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
           PGPASSWORD: postgres_password
-          
-       
+        
 
-#       - name: backup tables
-#         shell: bash
-#         run: |
-#           PGSSLMODE=allow PGPASSWORD='postgres_password' winpty ./pg_dump \
-#           --file ./backup \
-#           --host "$HOST" \
-#           --port "5432" \
-#           --username "$POSTGRES_USER" \
-#           --verbose \
-#           --no-owner \
-#           --no-privileges \
-#           --format=c \
-#           --blobs \
-#           --encoding "UTF8" \
-#           --table "esq_oasis_onboarding.domain" \
-#           --table "esq_oasis_onboarding.domain" \
-#           --table "esq_oasis_onboarding.domain" \
-#           --table "esq_oasis_onboarding.domain" \
-#           --table "esq_oasis_onboarding.domain" \
-#           "pdoasis"
+      - name: backup tables
+        shell: bash
+        run: |
+          pwd
+          PGSSLMODE=allow PGPASSWORD='postgres_password' winpty pg_dump \
+          --file ./backup \
+          --host "postgres" \
+          --username "postgres_user" \
+          --verbose \
+          --no-owner \
+          --no-privileges \
+          --format=c \
+          --blobs \
+          --encoding "UTF8" \
+          --table "esq_oasis.first" \
+          "postgres_db"
 
+      - name: set ddbb as in oasis
+        run: |
+          psql -h postgres -d postgres_db -U postgres_user -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-alter.sql
+        env:
+          # postgress password is required; alternatively, you can run:
+          # `PGPASSWORD=postgres_password psql ...`
+          PGPASSWORD: postgres_password
 
-#       - name: backup tables
-#         shell: bash
-#         run: |
-#           ./pg_restore.exe --host "$HOST" --port "5432" --username "$POSTGRES_USER" --dbname "$DATABASE" --verbose -n "esq_oasis_onboarding" "./backups/domain-10062022"
+      - name: dump backup
+        shell: bash
+        run: |
+          pg_restore -h postgres -d postgres_db -U postgres_user -n "esq_oasis" "./backup"
 
 #         env:
 #           # postgress password is required; alternatively, you can run:
