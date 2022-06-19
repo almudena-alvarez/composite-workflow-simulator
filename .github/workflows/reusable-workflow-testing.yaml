@@ -80,7 +80,8 @@ jobs:
           
       - name: Query database
         run: |
-          echo "vardev=`psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT user_id FROM esq_oasis.first WHERE username='as'"`" >> $GITHUB_ENV
+          vardev=`psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT user_id FROM esq_oasis.first WHERE username='as'"`
+          echo "vardev=$vardev" >> $GITHUB_ENV
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
