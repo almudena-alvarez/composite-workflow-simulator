@@ -46,12 +46,12 @@ jobs:
 #         with:
 #           path: karate
 
-#       - name: Checkout workflow repo
-#         uses: actions/checkout@v2
-#         with:
-#           repository: almudena-alvarez/composite-workflow-simulator
-#           ref: main
-#           path: workflow  
+      - name: Checkout workflow repo
+        uses: actions/checkout@v2
+        with:
+          repository: almudena-alvarez/composite-workflow-simulator
+          ref: main
+          path: workflow  
           
 #       - name: List files in the workspace
 #         shell: bash
