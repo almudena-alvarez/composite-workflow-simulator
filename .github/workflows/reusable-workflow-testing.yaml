@@ -77,5 +77,20 @@ jobs:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
           PGPASSWORD: postgres_password
+          
+      - name: Query database
+        run: |
+          vardev=`\
+          psql \
+          --host "postgres" \
+          --username "postgres_user" \
+          --dbname "postgres_db \
+          --command="SELECT user_id FROM esq_oasis.first WHERE username='as'"\
+          `
+          echo $vardev
+        env:
+          # postgress password is required; alternatively, you can run:
+          # `PGPASSWORD=postgres_password psql ...`
+          PGPASSWORD: postgres_password
 
 
