@@ -70,8 +70,6 @@ jobs:
       # queries database with postgres client
       - name: Query database
         run: |
-          psql -h postgres -d postgres_db -U postgres_user -c 'SELECT 1;'
-          psql -V
           psql -h postgres -d postgres_db -U postgres_user -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-setup.sql
         env:
           # postgress password is required; alternatively, you can run:
