@@ -41,25 +41,25 @@ jobs:
 
     steps:
     
-      - name: Checkout karate repository
-        uses: actions/checkout@v2
-        with:
-          path: karate
+#       - name: Checkout karate repository
+#         uses: actions/checkout@v2
+#         with:
+#           path: karate
 
-      - name: Checkout workflow repo
-        uses: actions/checkout@v2
-        with:
-          repository: almudena-alvarez/composite-workflow-simulator
-          ref: main
-          path: workflow  
+#       - name: Checkout workflow repo
+#         uses: actions/checkout@v2
+#         with:
+#           repository: almudena-alvarez/composite-workflow-simulator
+#           ref: main
+#           path: workflow  
           
-      - name: List files in the workspace
-        shell: bash
-        run: pwd
+#       - name: List files in the workspace
+#         shell: bash
+#         run: pwd
       
-      - name: List files in the workspace
-        shell: bash
-        run: ls -a /__w/karate-simulator/karate-simulator
+#       - name: List files in the workspace
+#         shell: bash
+#         run: ls -a /__w/karate-simulator/karate-simulator
           
 
       - name: Install PostgreSQL client
@@ -80,8 +80,7 @@ jobs:
           
       - name: Query database
         run: |
-          vardev=`psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT user_id FROM esq_oasis.first WHERE username='as'"`
-          echo $vardev >> $GITHUB_ENV
+          echo "vardev=`psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT user_id FROM esq_oasis.first WHERE username='as'"`" >> $GITHUB_ENV
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
