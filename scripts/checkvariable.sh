@@ -1,4 +1,4 @@
-response=[]
+response=["organizations": "lalala"]
 
 if [[ $response == "[]" ]] 
 then
