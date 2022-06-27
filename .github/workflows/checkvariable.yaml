@@ -1,0 +1,42 @@
+name: Karate test
+
+on:
+  workflow_call:
+  
+env:
+  CHECKING_DELETION: false
+
+jobs:
+
+  # label of the container job
+  checking-job:
+    # containers must run in Linux based operating systems
+    runs-on: ubuntu-latest
+    # Docker Hub image that `postgres-job` executes in
+
+    steps:
+    
+      - name: Checkout workflow repo
+        uses: actions/checkout@v2
+        with:
+          repository: almudena-alvarez/composite-workflow-simulator
+          ref: main
+          path: workflow 
+
+      - name: Checking variable
+        shell: bash
+        run: |
+        cd ${{ github.workspace }}/workflow/scripts
+        sh checkvariable.sh
+        
+      - name: Checking variable2
+        shell: bash
+        if: ${{ env.CHECKING_DELETION }}
+        run: |
+        echo "passed"
+        
+       - name: Checking variable3
+        shell: bash
+        run: |
+        echo "jumped to the next one"
+          
