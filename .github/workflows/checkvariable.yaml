@@ -26,17 +26,17 @@ jobs:
       - name: Checking variable
         shell: bash
         run: |
-        cd ${{ github.workspace }}/workflow/scripts
-        sh checkvariable.sh
+          cd ${{ github.workspace }}/workflow/scripts
+          sh ${{ github.workspace }}/workflow/scripts/checkvariable.sh
         
       - name: Checking variable2
         shell: bash
         if: ${{ env.CHECKING_DELETION }}
         run: |
-        echo "passed"
+          echo "passed"
         
-       - name: Checking variable3
+      - name: Checking variable3
         shell: bash
         run: |
-        echo "jumped to the next one"
+          echo "jumped to the next one"
           
