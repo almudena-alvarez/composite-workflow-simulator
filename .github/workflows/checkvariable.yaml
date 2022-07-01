@@ -5,6 +5,7 @@ on:
   
 env:
   CHECKING_DELETION: false
+  check_if: false
 
 jobs:
 
@@ -23,17 +24,23 @@ jobs:
           ref: main
           path: workflow 
 
-      - name: Checking variable
-        shell: bash
-        run: |
-          cd ${{ github.workspace }}/workflow/scripts
-          sh ${{ github.workspace }}/workflow/scripts/checkvariable.sh
+#       - name: Checking variable
+#         shell: bash
+#         run: |
+#           cd ${{ github.workspace }}/workflow/scripts
+#           sh ${{ github.workspace }}/workflow/scripts/checkvariable.sh
         
       - name: Checking variable2
         shell: bash
         if: ${{ env.CHECKING_DELETION }}
         run: |
           echo "passed"
+          
+      - name: Checking variable2
+        shell: bash
+        if: ${{ env.check_if }}
+        run: |
+          echo "passed if condition"
         
       - name: Checking variable3
         shell: bash
