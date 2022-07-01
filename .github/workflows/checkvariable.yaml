@@ -38,13 +38,13 @@ jobs:
           
       - name: Checking variable2
         shell: bash
-        if: $check_if == false 
+        if: $env.check_if == false 
         run: |
           echo "passed first if condition"
           
       - name: Checking variable2
         shell: bash
-        if: $check_if == true 
+        if: $env.check_if == true 
         run: |
           echo "passed if condition"
         
