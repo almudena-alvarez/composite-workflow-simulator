@@ -38,7 +38,7 @@ jobs:
           
       - name: Checking variable2
         shell: bash
-        if: ${{ env.check_if }}
+        if: ${{ env.check_if }} == true
         run: |
           echo "passed if condition"
         
