@@ -10,6 +10,9 @@ on:
       array_input:
         required: false
         type: string
+      execute:
+        required: false
+        type: boolean
   
 env:
   CHECKING_DELETION: false
@@ -31,6 +34,18 @@ jobs:
           repository: almudena-alvarez/composite-workflow-simulator
           ref: main
           path: workflow 
+          
+      - name: Checking variable5 YESYES
+        shell: bash
+        if: ${{ inputs.execute == 'true'  }}
+        run: |
+          echo "passed execute if condition"
+          
+      - name: Checking variable5 NOTNOT
+        shell: bash
+        if: ${{ inputs.execute == 'false'  }}
+        run: |
+          echo "passed execute if condition"
 
 #       - name: Checking variable
 #         shell: bash
