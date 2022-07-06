@@ -69,13 +69,14 @@ jobs:
           
       - name: Checking variable5 YESYES
         shell: bash
-        if: ${{ env.CHECKING_DELETION == 'false'  }} && steps.seedBuild.outcome == 'failure'
+        if: ${{ env.CHECKING_DELETION == 'false'  }} && (steps.seedBuild.outcome == 'failure')
         run: |
+          echo steps.seedBuild.outcome
           echo "passed fourth if condition"
           
       - name: Checking variable5 NONO
         shell: bash
-        if: ${{ env.CHECKING_DELETION == 'false'  }} && steps.seedBuild.outcome == 'success'
+        if: ${{ env.CHECKING_DELETION == 'false'  }} && (steps.seedBuild.outcome == 'success')
         run: |
           echo "passed fourth if condition"
         
