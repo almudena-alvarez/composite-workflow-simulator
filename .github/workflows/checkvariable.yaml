@@ -71,7 +71,7 @@ jobs:
         shell: bash
         if: ${{ env.CHECKING_DELETION == 'false'  }} && (steps.seedBuild.outcome == 'failure')
         run: |
-          echo steps.seedBuild.outcome
+          echo "steps.seedBuild.outcome"
           echo "passed fourth if condition"
           
       - name: Checking variable5 NONO
