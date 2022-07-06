@@ -41,13 +41,14 @@ jobs:
         shell: bash
         if: ${{ env.CHECKING_DELETION }}
         run: |
+          IFS=',' read -r -a array <<< "$inputt"
           for i in "${array[@]}"
           do
             : 
             echo "$i"
           done
         env:
-          array: ${{ inputs.array_input }}
+          inputt: ${{ inputs.array_input }}
         
         
         
