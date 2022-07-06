@@ -44,7 +44,7 @@ jobs:
           
       - name: Checking variable3
         shell: bash
-        if: ${{ env.check_if=='false'  }}
+        if: ${{ env.check_if == 'false'  }}
         run: |
           echo "passed second if condition"
           
@@ -56,7 +56,19 @@ jobs:
           
       - name: Checking variable5 NOT
         shell: bash
-        if: ${{ env.check_if=='true'  }}
+        if: ${{ env.check_if == 'true'  }}
+        run: |
+          echo "passed fourth if condition"
+          
+      - name: Checking variable5 NOTNOT
+        shell: bash
+        if: ${{ env.CHECKING_DELETION == 'true'  }}
+        run: |
+          echo "passed fourth if condition"
+          
+      - name: Checking variable5 YESYES
+        shell: bash
+        if: ${{ env.CHECKING_DELETION == 'false'  }}
         run: |
           echo "passed fourth if condition"
         
