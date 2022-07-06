@@ -3,6 +3,11 @@ name: Karate test
 on:
   workflow_call:
   
+    inputs:
+      first_input:
+        required: false
+        type: string
+  
 env:
   CHECKING_DELETION: false
   check_if: false
@@ -29,6 +34,13 @@ jobs:
 #         run: |
 #           cd ${{ github.workspace }}/workflow/scripts
 #           sh ${{ github.workspace }}/workflow/scripts/checkvariable.sh
+      - name: Checking variable1 NOT
+        shell: bash
+        if: ${{ env.CHECKING_DELETION }}
+        run: |
+          echo ${{ inputs.first_input }}
+        
+        
         
       - name: Checking variable1 NOT
         shell: bash
