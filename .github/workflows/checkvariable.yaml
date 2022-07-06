@@ -35,15 +35,20 @@ jobs:
           ref: main
           path: workflow 
           
+      - name: Checking variable5 echo
+        shell: bash
+        run: |
+          echo ${{ inputs.execute  }}
+          
       - name: Checking variable5 YESYES
         shell: bash
-        if: ${{ inputs.execute == 'true'  }}
+        if: ${{ inputs.execute == true }}
         run: |
           echo "passed execute if condition"
           
       - name: Checking variable5 NOTNOT
         shell: bash
-        if: ${{ inputs.execute == 'false'  }}
+        if: ${{ inputs.execute == false  }}
         run: |
           echo "passed execute if condition"
 
