@@ -7,6 +7,9 @@ on:
       first_input:
         required: false
         type: string
+      array_input:
+        required: false
+        type: string
   
 env:
   CHECKING_DELETION: false
@@ -38,7 +41,13 @@ jobs:
         shell: bash
         if: ${{ env.CHECKING_DELETION }}
         run: |
-          echo ${{ inputs.first_input }}
+          for i in "${array[@]}"
+          do
+            : 
+            echo "$i"
+          done
+        env:
+          array: ${{ inputs.array_input }}
         
         
         
