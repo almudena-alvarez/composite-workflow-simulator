@@ -30,7 +30,7 @@ jobs:
 #           cd ${{ github.workspace }}/workflow/scripts
 #           sh ${{ github.workspace }}/workflow/scripts/checkvariable.sh
         
-      - name: Checking variable1
+      - name: Checking variable1 NOT
         shell: bash
         if: ${{ env.CHECKING_DELETION }}
         run: |
@@ -48,13 +48,13 @@ jobs:
         run: |
           echo "passed second if condition"
           
-      - name: Checking variable4
+      - name: Checking variable4  NOT
         shell: bash
         if: ${{ env.check_if }} == 'true' 
         run: |
           echo "passed third if condition"
           
-      - name: Checking variable5
+      - name: Checking variable5 NOT
         shell: bash
         if: ${{ env.check_if=='true'  }}
         run: |
