@@ -43,7 +43,8 @@ jobs:
           for i in "${array[@]}"
           do
              : 
-          sh ${{ github.workspace }}/workflow/scripts/scriptarray.sh -u $i
+            echo "$i"
+            sh ${{ github.workspace }}/workflow/scripts/scriptarray.sh -u "$i"
           done;
           
       - name: Checking variable5 echo
