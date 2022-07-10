@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 function input_parameters() {
-  local p_alm_users=""
+
+echo "holiff"
+#   local p_alm_users=""
 
 # while [[ $# -gt 0 ]]; do
 #       case "$1" in
@@ -29,7 +31,7 @@ function input_parameters() {
 #   done
 
 
-  alm_user="${p_alm_users:-${INPUT_ALM_USERS?"No ALM user defined"}}"
+#   alm_user="${p_alm_users:-${INPUT_ALM_USERS?"No ALM user defined"}}"
 
 
 
