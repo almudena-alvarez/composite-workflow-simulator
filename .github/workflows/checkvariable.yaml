@@ -35,6 +35,16 @@ jobs:
           ref: main
           path: workflow 
           
+      - name: Checking SCRIPT
+        shell: bash
+        run: |
+          IFS=',' read -r -a array <<< "$users"
+          for i in "${array[@]}"
+          do
+             : 
+          sh scriptarray.sh -u $i
+          done;
+          
       - name: Checking variable5 echo
         shell: bash
         run: |
