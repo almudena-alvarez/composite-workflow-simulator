@@ -17,6 +17,7 @@ on:
 env:
   CHECKING_DELETION: false
   check_if: false
+  users: "almu,dena,super,star"
 
 jobs:
 
