@@ -5,7 +5,7 @@ function input_parameters() {
 
 while [[ $# -gt 0 ]]; do
       case "$1" in
-          -u|--schema)
+          -u|--users)
               if [[ $# == 1 ]]; then
                 >&2 echo "ERROR: No users specified"
                 exit 1
