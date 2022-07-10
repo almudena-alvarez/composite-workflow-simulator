@@ -37,7 +37,7 @@ jobs:
           path: workflow 
           
       - name: Checking SCRIPT
-        shell: bash
+        shell: '/bin/bash {0}'
         run: |
           IFS=',' read -r -a array <<< "$users"
           for i in "${array[@]}"
