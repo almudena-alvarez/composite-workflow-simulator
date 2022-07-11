@@ -125,7 +125,7 @@ function execute_ddl() {
 
 input_parameters "$@"
 copySchema=$original_schema'_copy'
-IFS=',' read -r -a array <<< "$master"
+IFS=',' read -r -a array <<< "$master_tables"
 echo $array
 printf -v psql_array "'%s'," "${array[@]//\'/\'\'}"
 psql_array=${psql_array%,}
@@ -148,7 +148,7 @@ var=($(PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target
 echo "var"
 echo $var
 
-echo"psql"
+echo "psql"
 echo $psql_array
 
 
