@@ -7,7 +7,7 @@ function input_parameters() {
   local p_target_database=""
   local p_pgsslmode=""
   local p_target_password=""
-  local p_target_port=""
+  local p_target_host=""
   local p_target_username=""
   local p_karateDataFile=""
   local p_master_tables=""
@@ -47,14 +47,14 @@ function input_parameters() {
               p_target_password="${2}"
               shift 2
               ;;
-#           -pt|--port)
-#               if [[ $# == 1 ]]; then
-#                 >&2 echo "ERROR: No port specified"
-#                 exit 1
-#               fi
-#               p_target_port="${2}"
-#               shift 2
-#               ;;
+          -h|--host)
+              if [[ $# == 1 ]]; then
+                >&2 echo "ERROR: No host specified"
+                exit 1
+              fi
+              p_target_host="${2}"
+              shift 2
+              ;;
 
           -u|--user)
               if [[ $# == 1 ]]; then
@@ -101,7 +101,7 @@ function input_parameters() {
   target_database="${p_target_database:-${INPUT_TARGET_DATABASE?"No target database defined"}}"
   pgsslmode="${p_pgsslmode:-${INPUT_PGSSLMODE?"No sslmode defined defined"}}"
   target_password="${p_target_password:-${INPUT_TARGET_PASSWORD?"No database password defined"}}"
-#   target_port="${p_target_port:-${INPUT_PORT?"No target PORT defined"}}"
+  target_host="${p_target_host:-${INPUT_HOST?"No target host defined"}}"
   target_username="${p_target_username:-${INPUT_USERNAME?"No username defined"}}"
   karateDataFile="${p_karateDataFile:-${INPUT_KARATE_DATAFILE?"No karate datafile defined"}}"
   master_tables="${p_master_tables:-${INPUT_MASTER_TABLES?"No target schema defined"}}"
