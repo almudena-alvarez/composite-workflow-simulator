@@ -87,16 +87,25 @@ jobs:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
           PGPASSWORD: postgres_password
-        
-
+          
       - name: check select with master
         shell: bash
         run: |
-          /bin/bash /__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts/postgres-truncate.sh
+          /bin/bash /__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts/postgres-truncate.sh -s "esq_oasis" -h "postgres" -d "postgres_db" -ssl "require" -p "postgres_password"  -u "postgres_user" -k "./karateDataFile.sql" -m $master
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
           PGPASSWORD: postgres_password
+        
+
+#       - name: check select with master
+#         shell: bash
+#         run: |
+#           /bin/bash /__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts/postgres-truncate.sh
+#         env:
+#           # postgress password is required; alternatively, you can run:
+#           # `PGPASSWORD=postgres_password psql ...`
+#           PGPASSWORD: postgres_password
 
 
 #       - name: backup tables
