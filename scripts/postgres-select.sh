@@ -19,11 +19,19 @@ echo $master
 
 jeje=($(psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis' AND tablename NOT IN  ('first')"));
 echo $jeje
-bis=`psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis'"`
+bis=`psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis' AND tablename NOT IN  ('first')"`
 
 echo "bis"
 echo $bis
 
+IFS=' ' read -r -a arraybis <<< "$bis"
+echo $arraybis
+
+for z in "${arraybis[@]}"
+    do
+    : 
+    echo "$z"
+done;
 # read -r -a psarray <<< $bis
 
 var=$(`psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis'"`);
