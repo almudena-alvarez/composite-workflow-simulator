@@ -120,7 +120,7 @@ function execute_truncate() {
 function execute_ddl() {
         local script_name="${@}"
         shift
-        psql -h postgres -d postgres_db -U postgres_user -f "$workflow_scripts"/"${script_name}"
+        PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -f "$workflow_scripts"/"${script_name}"
 }
 
 input_parameters "$@"
@@ -141,7 +141,7 @@ echo "clean truncate script"
 > "$workflow_scripts"/truncate.sql
 
 echo "delete unneccessary data";
-var=($(execute_ddl -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = '$original_schema' AND tablename NOT IN  ($psql_array)"));
+var=($(PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = '$original_schema' AND tablename NOT IN  ($psql_array)"));
 
 for z in "${var[@]}"
     do
@@ -151,7 +151,7 @@ for z in "${var[@]}"
     execute_truncate $schema_table
 done;
 
- execute_ddl -f "$workflow_scripts"/truncate.sql;
+#  execute_ddl -f "$workflow_scripts"/truncate.sql;
 
 # echo "insert karate data"
 # execute_ddl -f "$workflow_scripts"/$karateDataFile
