@@ -17,19 +17,38 @@ echo $master
 
 # echo $psql_array
 
-# var=($( psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis' AND tablename NOT IN  ('first')"));
-psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis'";
+# var=($(psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis' AND tablename NOT IN  ('first')"));
+bis=`psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis'"`
+
+echo "bis"
+echo $bis
+
+var=$(psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis'");
 
 
 echo "var"
 echo $var
 
+for z in "${bis[@]}"
+    do
+    : 
+    echo "bis"
+    echo "$z"
+#     clean=$(echo "$z" | tr -d '\r')
+#     schema_table=$original_schema.$clean
+#     echo "schema_table"
+#     echo $schema_table
+#     execute_truncate $schema_table
+done;
+
 for z in "${var[@]}"
     do
     : 
-    clean=$(echo "$z" | tr -d '\r')
-    schema_table=$original_schema.$clean
-    echo "schema_table"
-    echo $schema_table
-    execute_truncate $schema_table
+    echo "var"
+    echo "$z"
+#     clean=$(echo "$z" | tr -d '\r')
+#     schema_table=$original_schema.$clean
+#     echo "schema_table"
+#     echo $schema_table
+#     execute_truncate $schema_table
 done;
