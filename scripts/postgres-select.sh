@@ -10,7 +10,11 @@ echo $master
 # echo "psql_array"
 # echo $psql_array
 
-var=($( psql -U postgres -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis' AND tablename NOT IN  $master"));
+IFS=',' read -r -a array <<< "$master"
+printf -v psql_array "'%s'," "${array[@]//\'/\'\'}"
+psql_array=${psql_array%,}
+
+var=($( psql -U postgres -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis' AND tablename NOT IN  ($psql_array)"));
 
 echo "var"
 echo $var
