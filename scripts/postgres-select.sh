@@ -4,13 +4,13 @@ echo "master"
 echo $master
 
 
-printf -v psql_array "'%s'," "${master[@]//\'/\'\'}"
-psql_array=${psql_array%,}
+# printf -v psql_array "'%s'," "${master[@]//\'/\'\'}"
+# psql_array=${psql_array%,}
 
 echo "psql_array"
 echo $psql_array
 
-var=($( psql -U postgres -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis' AND tablename NOT IN  ($psql_array)"));
+var=($( psql -U postgres -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis' AND tablename NOT IN  ($master)"));
 
 echo "var"
 echo $var
