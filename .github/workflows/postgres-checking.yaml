@@ -2,6 +2,9 @@ name: Karate test
 
 on:
   workflow_call:
+  
+env:
+master:(first second)
 
 jobs:
 
@@ -77,14 +80,24 @@ jobs:
           PGPASSWORD: postgres_password
       
       
-#       - name: set ddbb as in oasis
-#         run: |
-#           psql -h postgres -d postgres_db -U postgres_user -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-setup.sql
-#         env:
-#           # postgress password is required; alternatively, you can run:
-#           # `PGPASSWORD=postgres_password psql ...`
-#           PGPASSWORD: postgres_password
+      - name: set ddbb as in oasis
+        run: |
+          psql -h postgres -d postgres_db -U postgres_user -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-setup.sql
+        env:
+          # postgress password is required; alternatively, you can run:
+          # `PGPASSWORD=postgres_password psql ...`
+          PGPASSWORD: postgres_password
         
+
+      - name: check select with master
+        run: |
+          psql -h postgres -d postgres_db -U postgres_user -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-select.sql
+          sh postgres-select.sh
+        env:
+          # postgress password is required; alternatively, you can run:
+          # `PGPASSWORD=postgres_password psql ...`
+          PGPASSWORD: postgres_password
+
 
 #       - name: backup tables
 #         shell: bash
