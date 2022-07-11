@@ -10,7 +10,7 @@ echo $master
 # echo "psql_array"
 # echo $psql_array
 
-var=($( psql -U postgres -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis' AND tablename NOT IN  ($master)"));
+var=($( psql -U postgres -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis' AND tablename NOT IN  $master"));
 
 echo "var"
 echo $var
