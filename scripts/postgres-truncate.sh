@@ -47,14 +47,14 @@ function input_parameters() {
               p_target_password="${2}"
               shift 2
               ;;
-          -pt|--port)
-              if [[ $# == 1 ]]; then
-                >&2 echo "ERROR: No port specified"
-                exit 1
-              fi
-              p_target_port="${2}"
-              shift 2
-              ;;
+#           -pt|--port)
+#               if [[ $# == 1 ]]; then
+#                 >&2 echo "ERROR: No port specified"
+#                 exit 1
+#               fi
+#               p_target_port="${2}"
+#               shift 2
+#               ;;
 
           -u|--user)
               if [[ $# == 1 ]]; then
@@ -101,7 +101,7 @@ function input_parameters() {
   target_database="${p_target_database:-${INPUT_TARGET_DATABASE?"No target database defined"}}"
   pgsslmode="${p_pgsslmode:-${INPUT_PGSSLMODE?"No sslmode defined defined"}}"
   target_password="${p_target_password:-${INPUT_TARGET_PASSWORD?"No database password defined"}}"
-  target_port="${p_target_port:-${INPUT_PORT?"No target PORT defined"}}"
+#   target_port="${p_target_port:-${INPUT_PORT?"No target PORT defined"}}"
   target_username="${p_target_username:-${INPUT_USERNAME?"No username defined"}}"
   karateDataFile="${p_karateDataFile:-${INPUT_KARATE_DATAFILE?"No karate datafile defined"}}"
   master_tables="${p_master_tables:-${INPUT_MASTER_TABLES?"No target schema defined"}}"
@@ -120,7 +120,7 @@ function execute_truncate() {
 function execute_ddl() {
         local script_name="${@}"
         shift
-        psql -h postgres -d postgres_db -U postgres_user -f "${script_name}"
+        psql -h postgres -d postgres_db -U postgres_user -f "$workflow_scripts"/"${script_name}"
 }
 
 copySchema=$original_schema'_copy'
