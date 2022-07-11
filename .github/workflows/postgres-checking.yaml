@@ -91,8 +91,7 @@ jobs:
 
       - name: check select with master
         run: |
-          psql -h postgres -d postgres_db -U postgres_user -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-select.sql
-          sh postgres-select.sh
+          sh /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-select.sh
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
