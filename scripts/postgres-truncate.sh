@@ -132,10 +132,10 @@ psql_array=${psql_array%,}
 
 
 echo "alter $original_schema to $copySchema and create karate $original_schema"
-execute_ddl -f "$workflow_scripts"/postgres-setup-new-table.sql
+execute_ddl postgres-setup-new-table.sql
 
 echo "add tables to karate $original_schema"
-execute_ddl -f "$workflow_scripts"/$karateDataFile.sql
+execute_ddl $karateDataFile
 
 echo "clean truncate script"
 > "$workflow_scripts"/truncate.sql
