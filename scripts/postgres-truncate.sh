@@ -138,7 +138,7 @@ echo "alter $original_schema to $copySchema and create karate $original_schema"
 execute_ddl postgres-setup-new-table.sql -v original_schema=$original_schema -v copySchema=$copySchema -v target_username=$target_username
 
 echo "add tables to karate $original_schema"
-execute_ddl $karateDataFile
+execute_ddl $karateDataFile -v copySchema=$copySchema
 
 echo "clean truncate script"
 > "$workflow_scripts"/truncate.sql
