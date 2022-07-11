@@ -145,6 +145,12 @@ echo "clean truncate script"
 
 echo "delete unneccessary data";
 var=($(PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = '$original_schema' AND tablename NOT IN  ($psql_array)"));
+echo "var"
+echo $var
+
+echo"psql"
+echo $psql_array
+
 
 for z in "${var[@]}"
     do
