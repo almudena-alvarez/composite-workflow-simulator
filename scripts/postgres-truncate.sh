@@ -164,7 +164,12 @@ done;
 
 cat "$workflow_scripts"/truncate.sql
 
-#  execute_ddl -f "$workflow_scripts"/truncate.sql;
+ execute_ddl truncate.sql;
+ 
+ PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c '\dn'
+ PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c 'SELECT count(*) FROM $original_schema.first'
+ PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c 'SELECT count(*) FROM $original_schema.second'
+ PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c 'SELECT count(*) FROM $original_schema.third'
 
 # echo "insert karate data"
 # execute_ddl -f "$workflow_scripts"/$karateDataFile
