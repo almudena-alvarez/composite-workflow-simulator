@@ -130,27 +130,11 @@ printf -v psql_array "'%s'," "${array[@]//\'/\'\'}"
 psql_array=${psql_array%,}
 
 
-echo "Dump $originalSchema"
-
-  PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" ./pg_dump \
-  --file "$workflow_scripts/database-flow" \
-  --host "${target_host}" \
-  --port "${target_port}" \
-  --username "${target_username}" \
-  --verbose \
-  --no-owner \
-  --no-privileges \
-  --format=c \
-  --blobs \
-  --encoding "UTF8" \
-  --schema "${original_schema}" \
-  --dbname ${target_database} 
-
 echo "alter $original_schema to $copySchema and create karate $original_schema"
 execute_ddl -f "$workflow_scripts"/postgres-setup-new-table.sql
 
 echo "add tables to karate $original_schema"
-./pg_restore.exe --host "$target_host" --port "$target_port" --username "$target_username" --dbname "$target_database" --verbose -n "$original_schema" "$workflow_scripts/database-flow"
+execute_ddl -f "$workflow_scripts"/$karateDataFile.sql
 
 echo "clean truncate script"
 > "$workflow_scripts"/truncate.sql
@@ -168,8 +152,8 @@ done;
 
  execute_ddl -f "$workflow_scripts"/truncate.sql;
 
-echo "insert karate data"
-execute_ddl -f "$workflow_scripts"/$karateDataFile
+# echo "insert karate data"
+# execute_ddl -f "$workflow_scripts"/$karateDataFile
 
 
 
