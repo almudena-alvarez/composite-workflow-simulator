@@ -130,18 +130,16 @@ echo $array
 printf -v psql_array "'%s'," "${array[@]//\'/\'\'}"
 psql_array=${psql_array%,}
 
-{
-  echo "SET @original_schema='${original_schema}';";
-  cat "$workflow_scripts"/postgres-setup-new-table.sql;
-}
-
-{
-  echo "SET @copySchema='${copySchema}';";
-  cat "$workflow_scripts"/postgres-setup-new-table.sql;
-}
 
 echo "alter $original_schema to $copySchema and create karate $original_schema"
-execute_ddl postgres-setup-new-table.sql
+{
+  echo "SET @original_schema='${original_schema}'; SET @copySchema='${copySchema}';";
+  cat "$workflow_scripts"/postgres-setup-new-table.sql;
+} | execute_ddl postgres-setup-new-table.sql
+
+
+
+
 
 echo "add tables to karate $original_schema"
 execute_ddl $karateDataFile
