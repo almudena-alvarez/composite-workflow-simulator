@@ -25,13 +25,17 @@ echo "bis"
 echo $bis
 
 IFS=' ' read -r -a arraybis <<< "$bis"
+echo "arraybis"
 echo $arraybis
 
 for z in "${arraybis[@]}"
     do
     : 
+    echo "arraybis in looop"
     echo "$z"
 done;
+
+echo "not in loop anymore"
 # read -r -a psarray <<< $bis
 
 var=$(`psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis'"`);
