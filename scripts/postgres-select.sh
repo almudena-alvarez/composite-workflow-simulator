@@ -23,9 +23,9 @@ bis=`psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename F
 echo "bis"
 echo $bis
 
-read -r -a psarray <<< $bis
+# read -r -a psarray <<< $bis
 
-var=$(psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis'");
+var=$(`psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis'"`);
 
 
 echo "var"
