@@ -120,7 +120,7 @@ function execute_truncate() {
 function execute_ddl() {
         local script_name="${@}"
         shift
-        PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -f "$workflow_scripts"/"${script_name}"
+        PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -f "$workflow_scripts"/"${script_name}" "$@"
 }
 
 input_parameters "$@"
@@ -132,10 +132,7 @@ psql_array=${psql_array%,}
 
 
 echo "alter $original_schema to $copySchema and create karate $original_schema"
-{
-  echo "SET @original_schema='${original_schema}'; SET @copySchema='${copySchema}';";
-  cat "$workflow_scripts"/postgres-setup-new-table.sql;
-} | execute_ddl postgres-setup-new-table.sql
+execute_ddl postgres-setup-new-table.sql -v original_schema=$original_schema -v copySchema=$copySchema -v target_username=$target_username
 
 
 
