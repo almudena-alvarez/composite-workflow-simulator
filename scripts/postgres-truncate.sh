@@ -161,6 +161,9 @@ for z in "${var[@]}"
     execute_truncate $schema_table
 done;
 
+
+cat "$workflow_scripts"/truncate.sql
+
 #  execute_ddl -f "$workflow_scripts"/truncate.sql;
 
 # echo "insert karate data"
