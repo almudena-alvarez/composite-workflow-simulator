@@ -90,8 +90,9 @@ jobs:
         
 
       - name: check select with master
+        shell: bash
         run: |
-          sh /__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts/postgres-select.sh
+          /bin/bash /__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts/postgres-select.sh
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
