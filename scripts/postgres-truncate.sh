@@ -132,7 +132,7 @@ psql_array=${psql_array%,}
 
 
 echo "alter $original_schema to $copySchema and create karate $original_schema"
-execute_ddl postgres-setup-new-table.sql -v original_schema=$original_schema -v copySchema=$copySchema -v target_username=$target_username
+PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -f "$workflow_scripts"/postgres-setup-new-table.sql -v original_schema=$original_schema -v copySchema=$copySchema -v target_username=$target_username
 
 
 
@@ -152,6 +152,7 @@ for z in "${var[@]}"
     : 
     clean=$(echo "$z" | tr -d '\r')
     schema_table=$original_schema.$clean
+    echo $schema_table
     execute_truncate $schema_table
 done;
 
