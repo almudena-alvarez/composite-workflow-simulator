@@ -147,7 +147,7 @@ echo "Dump $originalSchema"
   --dbname ${target_database} 
 
 echo "alter $original_schema to $copySchema and create karate $original_schema"
-execute_ddl -f "$workflow_scripts"/postgres-setup.sql
+execute_ddl -f "$workflow_scripts"/postgres-setup-new-table.sql
 
 echo "add tables to karate $original_schema"
 ./pg_restore.exe --host "$target_host" --port "$target_port" --username "$target_username" --dbname "$target_database" --verbose -n "$original_schema" "$workflow_scripts/database-flow"
