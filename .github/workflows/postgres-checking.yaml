@@ -62,9 +62,6 @@ jobs:
         shell: bash
         run: pwd
       
-      - name: List files in the workspace
-        shell: bash
-        run: ls -a /__w/karate-simulator/karate-simulator
           
 
       - name: Install PostgreSQL client
@@ -85,7 +82,7 @@ jobs:
       
       - name: set ddbb as in oasis
         run: |
-          psql -h postgres -d postgres_db -U postgres_user -f /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-setup.sql
+          psql -h postgres -d postgres_db -U postgres_user -f /__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts/postgres-setup.sql
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
@@ -94,7 +91,7 @@ jobs:
 
       - name: check select with master
         run: |
-          sh /__w/karate-simulator/karate-simulator/workflow/scripts/postgres-select.sh
+          sh /__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts/postgres-select.sh
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
