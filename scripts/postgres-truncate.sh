@@ -123,6 +123,7 @@ function execute_ddl() {
         psql -h postgres -d postgres_db -U postgres_user -f "$workflow_scripts"/"${script_name}"
 }
 
+input_parameters "$@"
 copySchema=$original_schema'_copy'
 IFS=',' read -r -a array <<< "$master"
 echo $array
