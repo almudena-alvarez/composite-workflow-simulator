@@ -1,6 +1,5 @@
 #!/bin/bash
 
-workflow_scripts="/__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts"
 
 function input_parameters() {
   local p_original_schema=""
@@ -135,6 +134,8 @@ function execute_ddl() {
 }
 
 input_parameters "$@"
+workflow_scripts="$location"/scripts
+
 copySchema=$original_schema'_copy'
 IFS=',' read -r -a array <<< "$master_tables"
 echo $array
