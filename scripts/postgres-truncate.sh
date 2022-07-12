@@ -113,7 +113,7 @@ function input_parameters() {
       for table in "${tables[@]}"; do
         formatted_master_tables="${formatted_master_tables}${formatted_master_tables:+,}'${table}'"
       done
-      echo "Formatted Master Tables: ${formatted_tables}"
+      echo "Formatted Master Tables: ${formatted_master_tables}"
   fi
 
 }
