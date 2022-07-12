@@ -1,6 +1,9 @@
 name: Karate test
 
 on:
+  push:
+    branches:
+      - main 
   workflow_call:
   
     inputs:
@@ -29,17 +32,10 @@ jobs:
 
     steps:
     
-      - name: Checkout workflow repo
-        uses: actions/checkout@v2
-        with:
-          repository: almudena-alvarez/composite-workflow-simulator
-          ref: main
-          path: workflow 
-          
       - name: Checking SCRIPT
         shell: '/bin/bash {0}'
         run: |
-          IFS=',' read -r -a array <<< "$users"
+          readarray -t, array <<<"$users,"; unset 'array[-1]'; declare -p array;
           for i in "${array[@]}"
           do
              : 
@@ -47,95 +43,124 @@ jobs:
             /bin/bash ${{ github.workspace }}/workflow/scripts/scriptarray.sh -u "$i"
           done;
           
-      - name: Checking variable5 echo
-        shell: bash
+      - name: Checking SCRIPT fail
+        shell: '/bin/bash {0}'
         run: |
-          echo ${{ inputs.execute  }}
-          
-      - name: Checking variable5 YESYES
-        shell: bash
-        if: ${{ inputs.execute == true }}
-        run: |
-          echo "passed execute if condition"
-          
-      - name: Checking variable5 NOTNOT
-        shell: bash
-        if: ${{ inputs.execute == false  }}
-        run: |
-          echo "passed execute if condition"
-
-#       - name: Checking variable
-#         shell: bash
-#         run: |
-#           cd ${{ github.workspace }}/workflow/scripts
-#           sh ${{ github.workspace }}/workflow/scripts/checkvariable.sh
-      - name: Checking variable1 NOT
-        shell: bash
-        if: ${{ env.CHECKING_DELETION }}
-        run: |
-          IFS=',' read -r -a array <<< "$inputt"
+          readarray -td, array <<<"$users,"; unset 'array[-1]'; declare -p array;
           for i in "${array[@]}"
           do
-            : 
+             : 
             echo "$i"
-          done
-        env:
-          inputt: ${{ inputs.array_input }}
+            /bin/bash ${{ github.workspace }}/workflow/scripts/scriptarray.sh -u "$i"
+          done;
+    
+#       - name: Checkout workflow repo
+#         uses: actions/checkout@v2
+#         with:
+#           repository: almudena-alvarez/composite-workflow-simulator
+#           ref: main
+#           path: workflow 
+          
+#       - name: Checking SCRIPT
+#         shell: '/bin/bash {0}'
+#         run: |
+#           IFS=',' read -r -a array <<< "$users"
+#           for i in "${array[@]}"
+#           do
+#              : 
+#             echo "$i"
+#             /bin/bash ${{ github.workspace }}/workflow/scripts/scriptarray.sh -u "$i"
+#           done;
+          
+#       - name: Checking variable5 echo
+#         shell: bash
+#         run: |
+#           echo ${{ inputs.execute  }}
+          
+#       - name: Checking variable5 YESYES
+#         shell: bash
+#         if: ${{ inputs.execute == true }}
+#         run: |
+#           echo "passed execute if condition"
+          
+#       - name: Checking variable5 NOTNOT
+#         shell: bash
+#         if: ${{ inputs.execute == false  }}
+#         run: |
+#           echo "passed execute if condition"
+
+# #       - name: Checking variable
+# #         shell: bash
+# #         run: |
+# #           cd ${{ github.workspace }}/workflow/scripts
+# #           sh ${{ github.workspace }}/workflow/scripts/checkvariable.sh
+#       - name: Checking variable1 NOT
+#         shell: bash
+#         if: ${{ env.CHECKING_DELETION }}
+#         run: |
+#           IFS=',' read -r -a array <<< "$inputt"
+#           for i in "${array[@]}"
+#           do
+#             : 
+#             echo "$i"
+#           done
+#         env:
+#           inputt: ${{ inputs.array_input }}
         
         
         
-      - name: Checking variable1 NOT
-        shell: bash
-        if: ${{ env.CHECKING_DELETION }}
-        run: |
-          echo "passed"
+#       - name: Checking variable1 NOT
+#         shell: bash
+#         if: ${{ env.CHECKING_DELETION }}
+#         run: |
+#           echo "passed"
           
-      - name: Checking variable2
-        shell: bash
-        if: ${{ env.check_if }} == 'false'
-        run: |
-          echo "passed first if condition"
+#       - name: Checking variable2
+#         shell: bash
+#         if: ${{ env.check_if }} == 'false'
+#         run: |
+#           echo "passed first if condition"
           
-      - name: Checking variable3
-        shell: bash
-        if: ${{ env.check_if == 'false'  }}
-        run: |
-          echo "passed second if condition"
+#       - name: Checking variable3
+#         shell: bash
+#         if: ${{ env.check_if == 'false'  }}
+#         run: |
+#           echo "passed second if condition"
           
-      - name: Checking variable4  NOT
-        shell: bash
-        if: ${{ env.check_if }} == 'true' 
-        run: |
-          echo "passed third if condition"
+#       - name: Checking variable4  NOT
+#         shell: bash
+#         if: ${{ env.check_if }} == 'true' 
+#         run: |
+#           echo "passed third if condition"
           
-      - name: Checking variable5 NOT
-        shell: bash
-        if: ${{ env.check_if == 'true'  }}
-        run: |
-          echo "passed fourth if condition"
+#       - name: Checking variable5 NOT
+#         shell: bash
+#         if: ${{ env.check_if == 'true'  }}
+#         run: |
+#           echo "passed fourth if condition"
           
-      - name: Checking variable5 NOTNOT
-        id: seedBuild
-        shell: bash
-        if: ${{ env.CHECKING_DELETION == 'true'  }}
-        run: |
-          echo "passed fourth if condition"
+#       - name: Checking variable5 NOTNOT
+#         id: seedBuild
+#         shell: bash
+#         if: ${{ env.CHECKING_DELETION == 'true'  }}
+#         run: |
+#           echo "passed fourth if condition"
           
-      - name: Checking variable5 YESYES
-        shell: bash
-        if: ${{ env.CHECKING_DELETION == 'false'  }} && (steps.seedBuild.outcome == 'failure')
-        run: |
-          echo "steps.seedBuild.outcome"
-          echo "passed fourth if condition"
+#       - name: Checking variable5 YESYES
+#         shell: bash
+#         if: ${{ env.CHECKING_DELETION == 'false'  }} && (steps.seedBuild.outcome == 'failure')
+#         run: |
+#           echo "steps.seedBuild.outcome"
+#           echo "passed fourth if condition"
           
-      - name: Checking variable5 NONO
-        shell: bash
-        if: ${{ env.CHECKING_DELETION == 'false'  }} && (steps.seedBuild.outcome == 'success')
-        run: |
-          echo "passed fourth if condition"
+#       - name: Checking variable5 NONO
+#         shell: bash
+#         if: ${{ env.CHECKING_DELETION == 'false'  }} && (steps.seedBuild.outcome == 'success')
+#         run: |
+#           echo "passed fourth if condition"
         
-      - name: Checking variable6
-        shell: bash
-        run: |
-          echo "jumped to the next one"
+#       - name: Checking variable6
+#         shell: bash
+#         run: |
+#           echo "jumped to the next one"
           
