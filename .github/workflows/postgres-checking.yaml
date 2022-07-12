@@ -7,7 +7,7 @@ on:
   workflow_call:
   
 env:
-  master: "second"
+  master: "first,second"
 
 jobs:
 
