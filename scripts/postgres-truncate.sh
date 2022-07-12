@@ -11,6 +11,7 @@ function input_parameters() {
   local p_target_username=""
   local p_karateDataFile=""
   local p_master_tables=""
+  local p_location=""
 
   while [[ $# -gt 0 ]]; do
       case "$1" in
@@ -82,6 +83,15 @@ function input_parameters() {
               p_master_tables="${2}"
               shift 2
               ;;
+              
+         -l|--location)
+              if [[ $# == 1 ]]; then
+                >&2 echo "ERROR: No location specified specified"
+                exit 1
+              fi
+              p_location="${2}"
+              shift 2
+              ;;
           --)
               shift
               break
@@ -105,6 +115,7 @@ function input_parameters() {
   target_username="${p_target_username:-${INPUT_USERNAME?"No username defined"}}"
   karateDataFile="${p_karateDataFile:-${INPUT_KARATE_DATAFILE?"No karate datafile defined"}}"
   master_tables="${p_master_tables:-${INPUT_MASTER_TABLES?"No target schema defined"}}"
+  location="${p_location:-${INPUT_LOCATION?"No location defined"}}"
 
 
   # echo "Creating ${target_schema} from ${source_schema} using SQL DMLs from ${script_dir}..."
