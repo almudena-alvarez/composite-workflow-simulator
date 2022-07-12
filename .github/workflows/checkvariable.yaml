@@ -35,7 +35,7 @@ jobs:
       - name: Checking SCRIPT
         shell: '/bin/bash {0}'
         run: |
-          readarray -t, array <<<"$users,"; unset 'array[-1]'; declare -p array;
+          readarray -d, -t array <<<"$users,"; unset 'array[-1]'; declare -p array;
           for i in "${array[@]}"
           do
              : 
@@ -46,7 +46,7 @@ jobs:
       - name: Checking SCRIPT fail
         shell: '/bin/bash {0}'
         run: |
-          readarray -td, array <<<"$users,"; unset 'array[-1]'; declare -p array;
+          readarray -d, array <<<"$users,"; unset 'array[-1]'; declare -p array;
           for i in "${array[@]}"
           do
              : 
