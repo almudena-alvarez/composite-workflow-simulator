@@ -1,9 +1,9 @@
 name: Karate test
 
 on:
-  push:
-    branches:
-      - main
+#   push:
+#     branches:
+#       - main
   workflow_call:
   
 env:
@@ -101,7 +101,11 @@ jobs:
           INPUT_MASTER_TABLES=$master \
           /bin/bash /__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts/postgres-truncate.sh
 
-        
+      - name: set ddbb as in oasis
+        shell: bash
+        run: |
+          PGPASSWORD: postgres_password psql -h postgres -d postgres_db -U postgres_user -f /__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts/postgres-setup.sql -v original_schema:"esq_almu_dena" -v copy_schema:${{ env.copy_schema }}
+
 
 #       - name: check select with master
 #         shell: bash
