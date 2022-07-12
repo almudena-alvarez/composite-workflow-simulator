@@ -107,6 +107,14 @@ function input_parameters() {
   karateDataFile="${p_karateDataFile:-${INPUT_KARATE_DATAFILE?"No karate datafile defined"}}"
   master_tables="${p_master_tables:-${INPUT_MASTER_TABLES?"No target schema defined"}}"
 
+  if [[ $master_tables ]]; then
+    readarray -td, tables <<<"$master_tables,"; unset 'tables[-1]'; declare -p tables;
+      formatted_master_tables="";
+      for table in "${tables[@]}"; do
+        formatted_master_tables="${formatted_master_tables}${formatted_master_tables:+,}'${table}'"
+      done
+      echo "Formatted Master Tables: ${formatted_tables}"
+  fi
 
 }
 
@@ -127,10 +135,10 @@ input_parameters "$@"
 
 
 copySchema=$original_schema'_copy'
-IFS=',' read -r -a array <<< "$master_tables"
-echo $array
-printf -v psql_array "'%s'," "${array[@]//\'/\'\'}"
-psql_array=${psql_array%,}
+# IFS=',' read -r -a array <<< "$master_tables"
+# echo $array
+# printf -v psql_array "'%s'," "${array[@]//\'/\'\'}"
+# psql_array=${psql_array%,}
 
 
 # echo "alter $original_schema to $copySchema and create karate $original_schema"
@@ -146,12 +154,12 @@ echo "clean truncate script"
 > "$workflow_scripts"/truncate.sql
 
 echo "delete unneccessary data";
-var=($(PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = '$original_schema' AND tablename NOT IN  ($psql_array)"));
+var=($(PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = '$original_schema' AND tablename NOT IN  ($formatted_master_tables)"));
 echo "var"
 echo $var
 
-echo "psql"
-echo $psql_array
+# echo "psql"
+# echo $psql_array
 
 
 for z in "${var[@]}"
