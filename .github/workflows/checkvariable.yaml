@@ -1,9 +1,9 @@
 name: Karate test
 
 on:
-#   push:
-#     branches:
-#       - main 
+  push:
+    branches:
+      - main 
   workflow_call:
   
     inputs:
@@ -33,7 +33,7 @@ jobs:
     steps:
     
       - name: Checking SCRIPT
-        shell: '/bin/bash {0}'
+        shell: bash
         run: |
           readarray -d, -t array <<<"$users,"; unset 'array[-1]'; declare -p array;
           for i in "${array[@]}"
@@ -43,7 +43,7 @@ jobs:
           done;
           
       - name: Checking SCRIPT fail
-        shell: '/bin/bash {0}'
+        shell: bash
         run: |
           readarray -d, array <<<"$users,"; unset 'array[-1]'; declare -p array;
           for i in "${array[@]}"
