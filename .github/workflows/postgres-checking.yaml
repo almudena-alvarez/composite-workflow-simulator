@@ -91,7 +91,15 @@ jobs:
       - name: check select with master
         shell: bash
         run: |
-         INPUT_ORIGINAL_SCHEMA="esq_almu_dena" /bin/bash /__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts/postgres-truncate.sh -h "postgres" -d "postgres_db" -ssl "allow" -p "postgres_password"  -u "postgres_user" -k "./karateDataFile.sql" -m $master
+          INPUT_ORIGINAL_SCHEMA="esq_almu_dena" \
+          INPUT_TARGET_DATABASE="postgres_db" \
+          INPUT_PGSSLMODE="allow" \
+          INPUT_TARGET_PASSWORD="postgres_password" \
+          INPUT_HOST="postgres" \
+          INPUT_USERNAME="postgres_user" \
+          INPUT_KARATE_DATAFILE="./karateDataFile.sql" \
+          INPUT_MASTER_TABLES=$master \
+          /bin/bash /__w/composite-workflow-simulator/composite-workflow-simulator/workflow/scripts/postgres-truncate.sh
 
         
 
