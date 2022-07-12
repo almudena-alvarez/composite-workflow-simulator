@@ -128,21 +128,17 @@ function execute_truncate() {
 function execute_ddl() {
         local script_name="${1}"
         shift
-        PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -f "$workflow_scripts"/"${script_name}" "$@"
+        PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" \
+        psql -h ${target_host} \
+        -U ${target_username} \
+        -d ${target_database} \
+        -f "$workflow_scripts"/"${script_name}" "$@"
 }
 
 input_parameters "$@"
 
-
 copySchema=$original_schema'_copy'
-# IFS=',' read -r -a array <<< "$master_tables"
-# echo $array
-# printf -v psql_array "'%s'," "${array[@]//\'/\'\'}"
-# psql_array=${psql_array%,}
-
-
-# echo "alter $original_schema to $copySchema and create karate $original_schema"
-# PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -f "$workflow_scripts"/postgres-setup-new-table.sql -v original_schema=$original_schema -v copySchema=$copySchema -v target_username=$target_username
+echo "copySchema: " $copySchema
 
 echo "alter $original_schema to $copySchema and create karate $original_schema"
 execute_ddl postgres-setup-new-table.sql -v original_schema=$original_schema -v copySchema=$copySchema -v target_username=$target_username
@@ -153,15 +149,13 @@ execute_ddl $karateDataFile -v original_schema=$original_schema
 echo "clean truncate script"
 > "$workflow_scripts"/truncate.sql
 
-echo "delete unneccessary data";
-var=($(PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = '$original_schema' AND tablename NOT IN  ($formatted_master_tables)"));
-echo "var"
-echo $var
+var=($(PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql \
+-h ${target_host} \
+-U ${target_username} \
+-d ${target_database} \
+-AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = '$original_schema' AND tablename NOT IN  ($formatted_master_tables)"));
 
-# echo "psql"
-# echo $psql_array
-
-
+echo "Tables to truncate: "
 for z in "${var[@]}"
     do
     : 
@@ -171,27 +165,14 @@ for z in "${var[@]}"
     execute_truncate $schema_table
 done;
 
-
+echo "Truncate script: "
 cat "$workflow_scripts"/truncate.sql
 
- execute_ddl truncate.sql;
+echo "Executing Truncate script: "
+execute_ddl truncate.sql;
  
- PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c '\dn'
- PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c "SELECT count(*) FROM $original_schema.first"
- PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c "SELECT count(*) FROM $original_schema.second"
- PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c "SELECT count(*) FROM $original_schema.third"
-
-# echo "insert karate data"
-# execute_ddl -f "$workflow_scripts"/$karateDataFile
-
-
-
-
-# var=($(psql -h postgres -d postgres_db -U postgres_user -AXqtc "SELECT tablename FROM pg_tables WHERE schemaname = 'esq_oasis' AND tablename NOT IN  ($psql_array)"));
-
-# echo "loop"
-# for z in "${var[@]}"
-#     do
-#     : 
-#     echo "$z"
-# done;
+echo "Number of rows per table: "
+PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c '\dn'
+PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c "SELECT count(*) FROM $original_schema.first"
+PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c "SELECT count(*) FROM $original_schema.second"
+PGSSLMODE="${pgsslmode}" PGPASSWORD="${target_password}" psql -h ${target_host} -U ${target_username} -d ${target_database} -c "SELECT count(*) FROM $original_schema.third"
