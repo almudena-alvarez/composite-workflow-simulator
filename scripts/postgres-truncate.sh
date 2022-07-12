@@ -108,8 +108,6 @@ function input_parameters() {
   master_tables="${p_master_tables:-${INPUT_MASTER_TABLES?"No target schema defined"}}"
 
 
-
-  # echo "Creating ${target_schema} from ${source_schema} using SQL DMLs from ${script_dir}..."
 }
 
 
