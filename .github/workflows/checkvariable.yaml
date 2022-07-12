@@ -40,7 +40,6 @@ jobs:
           do
              : 
             echo "$i"
-            /bin/bash ${{ github.workspace }}/workflow/scripts/scriptarray.sh -u "$i"
           done;
           
       - name: Checking SCRIPT fail
@@ -51,7 +50,6 @@ jobs:
           do
              : 
             echo "$i"
-            /bin/bash ${{ github.workspace }}/workflow/scripts/scriptarray.sh -u "$i"
           done;
     
 #       - name: Checkout workflow repo
