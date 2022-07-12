@@ -115,7 +115,6 @@ function input_parameters() {
       done
       echo "Formatted Master Tables: ${formatted_master_tables}"
   fi
-
 }
 
 
@@ -137,14 +136,19 @@ function execute_ddl() {
 
 input_parameters "$@"
 
-copySchema=$original_schema'_copy'
-echo "copySchema: " $copySchema
+copy_schema=$original_schema'_copy'
+echo "copy_schema: " $copy_schema
+echo "copy_schema=$copy_schema" >> $GITHUB_ENV
 
-echo "alter $original_schema to $copySchema and create karate $original_schema"
-execute_ddl postgres-setup-new-table.sql -v original_schema=$original_schema -v copySchema=$copySchema -v target_username=$target_username
+echo "alter $original_schema to $copy_schema and create karate $original_schema"
+execute_ddl postgres-setup-new-table.sql \
+-v original_schema=$original_schema \
+-v copy_schema=$copy_schema \
+-v target_username=$target_username
 
 echo "add tables to karate $original_schema"
-execute_ddl $karateDataFile -v original_schema=$original_schema
+execute_ddl $karateDataFile \
+-v original_schema=$original_schema
 
 echo "clean truncate script"
 > "$workflow_scripts"/truncate.sql
