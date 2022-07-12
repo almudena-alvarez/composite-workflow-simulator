@@ -104,7 +104,7 @@ jobs:
       - name: complete job
         shell: bash
         run: |
-          PGPASSWORD postgres_password psql \
+          PGPASSWORD="postgres_password" psql \
           -h postgres \
           -d postgres_db \
           -U postgres_user \
