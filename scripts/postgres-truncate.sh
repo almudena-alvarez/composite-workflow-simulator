@@ -108,7 +108,7 @@ function input_parameters() {
   master_tables="${p_master_tables:-${INPUT_MASTER_TABLES?"No target schema defined"}}"
 
   if [[ $master_tables ]]; then
-    readarray -td, tables <<<"$master_tables,"; unset 'tables[-1]'; declare -p tables;
+    readarray -d, -t tables <<<"$master_tables,"; unset 'tables[-1]'; declare -p tables;
       formatted_master_tables="";
       for table in "${tables[@]}"; do
         formatted_master_tables="${formatted_master_tables}${formatted_master_tables:+,}'${table}'"
