@@ -14,9 +14,9 @@ runs:
   using: "composite"
   steps:
 
-  - run: echo {{ inputs.input }}
+  - run: echo ${{ inputs.input }}
     shell: bash
-  - run: echo {{ inputs.secret }}
+  - run: echo ${{ inputs.secret }}
     shell: bash
   - run: echo "hola ha funcionado"
     shell: bash
@@ -39,9 +39,3 @@ runs:
   - id: karate
     shell: bash
     run: ${{ github.action_path }}/executablescript.sh
-
-  - id: karatetwo
-    shell: bash
-    run: |
-      chmod +x /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
-      sh /home/runner/work/karate-simulator/karate-simulator/tests/thisisascript.sh
