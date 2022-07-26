@@ -7,7 +7,7 @@ on:
 
 jobs:
   trial:
-      name: job-name
+    name: job-name
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -17,7 +17,7 @@ jobs:
         uses: ./.github/actions/database
         with:
           input: "this is the input"
-        secrets:
-          secret: "and this is the secret"
+          secret: ${{ secrets.secret }}
+
   
   
