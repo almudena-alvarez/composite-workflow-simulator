@@ -1,0 +1,23 @@
+name: composite
+
+on:
+    push:
+      branches:
+      - main
+
+jobs:
+  trial:
+      name: job-name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: name
+        id: id
+        uses: ./.github/actions/database
+        with:
+          input: "this is the input"
+        secrets:
+          secret: "and this is the secret"
+  
+  
