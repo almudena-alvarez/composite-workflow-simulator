@@ -2,14 +2,21 @@ name: 'Karate first test'
 description: 'First trial'
 
 inputs:
-  first_secret:
-    description: "first secret"
+  input:
+    description: "first input"
+    required: true
+    
+secrets:
+  secret:
+    description: "trying secret"
     required: true
 
 runs:
   using: "composite"
   steps:
 
+  - run: echo {{ inputs.input }}
+  - run: echo {{ secrets.secret }}
   - run: echo "hola ha funcionado"
     shell: bash
   - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
