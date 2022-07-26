@@ -15,7 +15,9 @@ runs:
   steps:
 
   - run: echo {{ inputs.input }}
+    shell: bash
   - run: echo {{ inputs.secret }}
+    shell: bash
   - run: echo "hola ha funcionado"
     shell: bash
   - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
