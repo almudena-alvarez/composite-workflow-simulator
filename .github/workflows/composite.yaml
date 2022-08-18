@@ -20,6 +20,9 @@ jobs:
 #         with:
 #           input: "this is the input"
 #           secret: ${{ secrets.secret }}
+      - name: name
+        id: test
+        run: echo "y la variable composite dice asi ${{ outputs.pruebafinal }}"
 
   
   
