@@ -23,6 +23,4 @@ runs:
   - id: karateone
     shell: bash
     run: ${{ github.action_path }}/executablescript.sh
-  - id: karatedos
-    shell: bash
-    run: echo ${{ outputs.chart_name }}
+
