@@ -9,17 +9,20 @@ description: 'First trial'
 #     description: "trying secret"
 #     required: true
 
-outputs:
-  chart_name:
-    description: "The name of the packaged Chart"
-    value: ${{ steps.karate.outputs.prueba }}
+# outputs:
+#   chart_name:
+#     description: "The name of the packaged Chart"
+#     value: ${{ steps.karate.outputs.prueba }}
     
 runs:
   using: "composite"
   steps:
-  - id: karate
-    shell: bash
-    run: ${{ github.action_path }}/executablescript.sh
-  - id: karatedos
-    shell: bash
-    run: echo ${{ outputs.chart_name }}
+    - id: karateone
+      shell: bash
+      run: chmod +x ${{ github.action_path }}/executablescript.sh
+#   - id: karate
+#     shell: bash
+#     run: ${{ github.action_path }}/executablescript.sh
+#   - id: karatedos
+#     shell: bash
+#     run: echo ${{ outputs.chart_name }}
