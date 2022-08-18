@@ -9,7 +9,11 @@ inputs:
     description: "trying secret"
     required: true
 
-
+outputs:
+  chart_name:
+    description: "The name of the packaged Chart"
+    value: ${{ steps.karate.outputs.prueba }}
+    
 runs:
   using: "composite"
   steps:
@@ -20,7 +24,8 @@ runs:
     shell: bash
   - run: echo "hola ha funcionado"
     shell: bash
-  - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+  - id: pruebastep
+    run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
     shell: bash
   - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
     shell: bash
@@ -39,3 +44,6 @@ runs:
   - id: karate
     shell: bash
     run: ${{ github.action_path }}/executablescript.sh
+  - id: karatedos
+    shell: bash
+    run: echo ${{ outputs.chart_name }}
