@@ -9,6 +9,8 @@ jobs:
   trial:
     name: job-name
     runs-on: ubuntu-latest
+    outputs:
+      pruebafinal: ${{ steps.id.outputs.chart_name }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
