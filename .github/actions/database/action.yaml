@@ -1,13 +1,13 @@
 name: 'Karate first test'
 description: 'First trial'
 
-inputs:
-  input:
-    description: "first input"
-    required: true
-  secret:
-    description: "trying secret"
-    required: true
+# inputs:
+#   input:
+#     description: "first input"
+#     required: true
+#   secret:
+#     description: "trying secret"
+#     required: true
 
 outputs:
   chart_name:
@@ -18,10 +18,10 @@ runs:
   using: "composite"
   steps:
 
-  - run: echo ${{ inputs.input }}
-    shell: bash
-  - run: echo ${{ inputs.secret }}
-    shell: bash
+#   - run: echo ${{ inputs.input }}
+#     shell: bash
+#   - run: echo ${{ inputs.secret }}
+#     shell: bash
   - run: echo "hola ha funcionado"
     shell: bash
   - id: pruebastep
