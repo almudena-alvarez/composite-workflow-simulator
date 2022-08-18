@@ -22,7 +22,8 @@ jobs:
 #           secret: ${{ secrets.secret }}
       - name: name
         id: test
-        run: echo "y la variable composite dice asi ${{ outputs.pruebafinal }}"
+        shell: bash
+        run: echo "y la variable composite dice asi ${{ steps.id.outputs.chart_name }}"
 
   
   
