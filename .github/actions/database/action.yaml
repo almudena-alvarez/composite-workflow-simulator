@@ -30,11 +30,13 @@ runs:
 #     shell: bash
 #     run: echo "${{ steps.karate.outputs.outputprueba }}"
     - name: Do Work
+      shell: bash
       run: |
         echo '::set-output name=FAV_NUMBER::3'
         echo '::set-output name=FAV_ANIMAL::tiger'
       id: abc
     - name: Read output
+      shell: bash
       run: |
         echo "${{steps.abc.outputs.FAV_NUMBER}}"
         echo "${{steps.abc.outputs.FAV_ANIMAL}}"
