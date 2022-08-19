@@ -12,7 +12,7 @@ description: 'First trial'
 outputs:
   chart_name:
     description: "The name of the packaged Chart"
-    value: ${{ steps.karate.outputs.prueba }}
+    value: ${{ steps.karate.outputs.outputprueba }}
     
 runs:
   using: "composite"
@@ -25,6 +25,6 @@ runs:
     run: ${{ github.action_path }}/executablescript.sh
   - id: karatetwo
     shell: bash
-    run: echo "${{ steps.karate.outputs.prueba }}"
+    run: echo "${{ steps.karate.outputs.outputprueba }}"
 
 
