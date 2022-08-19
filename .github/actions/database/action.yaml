@@ -11,12 +11,15 @@ description: 'First trial'
 
 # outputs:
 #   chart_name:
-#     description: "The name of the packaged Chart"
-#     value: ${{ steps.karate.outputs.outputprueba }}
+    description: "The name of the packaged Chart"
+    value: ${{ steps.karate.outputs.outputprueba }}
 outputs:
-   fav-animal: ${{steps.abc.outputs.FAV_ANIMAL}}
-   fav-number: ${{steps.abc.outputs.FAV_NUMBER}}
-    
+   fav-animal: 
+      description: "The name of the packaged Chart"
+      value: ${{steps.abc.outputs.FAV_ANIMAL}}
+   fav-number:
+      description: "The name of the packaged Chart"
+      value: ${{steps.abc.outputs.FAV_NUMBER}}
 runs:
   using: "composite"
   steps:
