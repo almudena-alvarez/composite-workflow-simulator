@@ -19,9 +19,9 @@ jobs:
       - name: name
         id: id
         uses: ./.github/actions/database
-#         with:
+        with:
 #           input: "this is the input"
-#           secret: ${{ secrets.secret }}
+          secret: ${{ secrets.secret }}
       - name: name
         id: test
         shell: bash
