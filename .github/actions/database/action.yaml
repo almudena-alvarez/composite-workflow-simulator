@@ -42,15 +42,14 @@ runs:
       run: ${{ github.action_path }}/executablescript.sh
     - id: check-conditional-false
       shell: bash
-      if: "${{ inputs.input == 'lalala' }}"
       run: |
-        echo ${{ inputs.input }}
+        echo "${{ inputs.input }}"
         ${{ github.action_path }}/executablescript.sh
     - id: check-conditional-true
       shell: bash
       if: "${{ inputs.secret != '' }}"
       run: |
-        echo ${{ inputs.secret }}
+        echo "${{ inputs.secret }}"
         ${{ github.action_path }}/executablescript.sh
 
 
