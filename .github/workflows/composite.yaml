@@ -12,6 +12,7 @@ jobs:
     outputs:
         fav-animal: ${{steps.id.outputs.fav-animal}}
         fav-number: ${{steps.id.outputs.fav-number}}
+        prueba: ${{steps.id.outputs.prueba}}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -27,6 +28,7 @@ jobs:
         run: |
             echo ${{ steps.id.outputs.fav-animal }}
             echo ${{ steps.id.outputs.fav-number }}
+            echo ${{ steps.id.outputs.prueba }}
 
   
   
