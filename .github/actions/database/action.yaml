@@ -14,7 +14,7 @@ description: 'First trial'
 #     description: "The name of the packaged Chart"
 #     value: ${{ steps.karate.outputs.outputprueba }}
 outputs:
-   fav-animal: tiger
+   fav-animal: ${{steps.abc.outputs.FAV_ANIMAL}}
    fav-number: ${{steps.abc.outputs.FAV_NUMBER}}
     
 runs:
@@ -32,12 +32,12 @@ runs:
     - name: Do Work
       run: |
         echo '::set-output name=FAV_NUMBER::3'
-        echo '::set-output name=FAV_COLOR::blue'
+        echo '::set-output name=FAV_ANIMAL::tiger'
       id: abc
     - name: Read output
       run: |
         echo "${{steps.abc.outputs.FAV_NUMBER}}"
-        echo "${{steps.abc.outputs.FAV_COLOR}}"
+        echo "${{steps.abc.outputs.FAV_ANIMAL}}"
 
 
 
