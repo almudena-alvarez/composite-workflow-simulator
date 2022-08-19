@@ -1,0 +1,15 @@
+name: "Create temp directory"
+description: "Action to create temp directory"
+
+outputs:
+  temp_dir: 
+    description: "Temp directory"
+    value: ${{steps.create-temp-dir.outputs.temp_dir}}
+
+runs:
+  using: "composite"
+  steps:
+    - id: create-temp-dir
+      shell: bash
+      run: |
+        ${{ github.action_path }}/main.sh

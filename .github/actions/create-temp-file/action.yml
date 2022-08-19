@@ -1,0 +1,30 @@
+name: "Create temp file"
+description: "Action to create temp file"
+
+inputs:
+  temp_dir:
+    description: "Directory of the temporary directory"
+    required: true
+  name:
+    description: "Name of the temporary file"
+    required: true
+  file_type:
+    description: "File type of the temporary file. It not given default will be set"
+    required: false
+
+outputs:
+  temp_file: 
+    description: "Temp file"
+    value: ${{steps.create-temp-file.outputs.temp_file}}
+
+runs:
+  using: "composite"
+  steps:
+    - id: create-temp-file
+      shell: bash
+      run: |
+        ${{ github.action_path }}/main.sh
+      env:
+        INPUT_TEMP_DIR: "${{ inputs.temp_dir }}"
+        INPUT_NAME: "${{ inputs.name }}"
+        INPUT_FILE_TYPE: "${{ inputs.file_type }}"
