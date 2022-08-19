@@ -9,22 +9,35 @@ description: 'First trial'
 #     description: "trying secret"
 #     required: true
 
-outputs:
-  chart_name:
-    description: "The name of the packaged Chart"
-    value: ${{ steps.karate.outputs.outputprueba }}
+# outputs:
+#   chart_name:
+#     description: "The name of the packaged Chart"
+#     value: ${{ steps.karate.outputs.outputprueba }}
+   outputs:
+      fav-animal: tiger
+      fav-number: ${{steps.abc.outputs.FAV_NUMBER}}
     
 runs:
   using: "composite"
   steps:
-  - id: karatezero
-    shell: bash
-    run: chmod +x ${{ github.action_path }}/executablescript.sh
-  - id: karateone
-    shell: bash
-    run: ${{ github.action_path }}/executablescript.sh
-  - id: karatetwo
-    shell: bash
-    run: echo "${{ steps.karate.outputs.outputprueba }}"
+#   - id: karatezero
+#     shell: bash
+#     run: chmod +x ${{ github.action_path }}/executablescript.sh
+#   - id: karateone
+#     shell: bash
+#     run: ${{ github.action_path }}/executablescript.sh
+#   - id: karatetwo
+#     shell: bash
+#     run: echo "${{ steps.karate.outputs.outputprueba }}"
+    - name: Do Work
+      run: |
+        echo '::set-output name=FAV_NUMBER::3'
+        echo '::set-output name=FAV_COLOR::blue'
+      id: abc
+    - name: Read output
+      run: |
+        echo "${{steps.abc.outputs.FAV_NUMBER}}"
+        echo "${{steps.abc.outputs.FAV_COLOR}}"
+
 
 
