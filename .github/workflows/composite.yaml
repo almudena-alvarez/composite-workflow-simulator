@@ -10,7 +10,8 @@ jobs:
     name: job-name
     runs-on: ubuntu-latest
     outputs:
-      pruebafinal: ${{ steps.id.outputs.chart_name }}
+        fav-animal: ${{steps.id.outputs.fav-animal}}
+        fav-number: ${{steps.id.outputs.fav-number}}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -23,7 +24,9 @@ jobs:
       - name: name
         id: test
         shell: bash
-        run: echo ${{ steps.id.outputs.chart_name }}
+        run: |
+            echo ${{ steps.id.outputs.fav-animal }}
+            echo ${{ steps.id.outputs.fav-number }}
 
   
   
