@@ -29,7 +29,7 @@ jobs:
         with:
           temp_dir: ${{steps.dir.outputs.temp_dir}}
           name: "name"
-          file_type: ".sql"
+          file_type: "sql"
       - name: filesuffix echo
         id: filesuffixecho
         shell: bash
