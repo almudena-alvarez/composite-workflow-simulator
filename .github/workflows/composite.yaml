@@ -14,8 +14,8 @@ jobs:
         fav-number: ${{steps.id.outputs.fav-number}}
         prueba: ${{steps.id.outputs.prueba}}
     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: name
         id: id
         uses: ./.github/actions/database
