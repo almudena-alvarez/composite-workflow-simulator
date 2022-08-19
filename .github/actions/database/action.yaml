@@ -20,6 +20,10 @@ outputs:
    fav-number:
       description: "The name of the packaged Chart"
       value: ${{steps.abc.outputs.FAV_NUMBER}}
+   prueba:
+      description: "The name of the packaged Chart"
+      value: ${{steps.run-script.outputs.outputprueba}}
+   
 runs:
   using: "composite"
   steps:
