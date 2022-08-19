@@ -20,22 +20,12 @@ outputs:
 runs:
   using: "composite"
   steps:
-#   - id: karatezero
-#     shell: bash
-#     run: chmod +x ${{ github.action_path }}/executablescript.sh
-#   - id: karateone
-#     shell: bash
-#     run: ${{ github.action_path }}/executablescript.sh
-#   - id: karatetwo
-#     shell: bash
-#     run: echo "${{ steps.karate.outputs.outputprueba }}"
-    - name: Do Work
+    - id: abc
       shell: bash
       run: |
         echo '::set-output name=FAV_NUMBER::3'
         echo '::set-output name=FAV_ANIMAL::tiger'
-      id: abc
-    - name: Read output
+    - id: Read-output
       shell: bash
       run: |
         echo "${{steps.abc.outputs.FAV_NUMBER}}"
