@@ -45,7 +45,7 @@ runs:
       run: |
         echo "${{ inputs.input }}"
         ${{ github.action_path }}/executablescript.sh
-      with:
+      env:
         INPUT_INPUTVAR: "${{ inputs.inputvar }}"
     - id: check-conditional-true
       shell: bash
