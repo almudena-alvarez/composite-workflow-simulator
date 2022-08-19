@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "${INPUT_INPUTVAR}"
+echo "im in the script and this is '${INPUT_INPUTVAR}'"
 
 prueba='esto es una prueba'
 
