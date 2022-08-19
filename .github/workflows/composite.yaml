@@ -21,7 +21,7 @@ jobs:
         uses: ./.github/actions/database
         with:
 #           input: "this is the input"
-          secret: ${{ secrets.secret }}
+          secret: ${{ secrets.SECRET }}
       - name: name
         id: test
         shell: bash
