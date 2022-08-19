@@ -20,7 +20,7 @@ jobs:
         id: id
         uses: ./.github/actions/database
         with:
-#           input: "this is the input"
+          input: "this is the input"
           secret: ${{ secrets.SECRET }}
       - name: name
         id: test
