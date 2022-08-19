@@ -26,7 +26,5 @@ runs:
   - id: karatetwo
     shell: bash
     run: echo ${{ steps.karate.outputs.prueba }}
-  - id: karatethree
-    shell: bash
-    run: echo ${{ outputs.chart_name }}
+
 
