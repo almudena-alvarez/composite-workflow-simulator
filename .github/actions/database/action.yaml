@@ -2,7 +2,7 @@ name: 'Karate first test'
 description: 'First trial'
 
 inputs:
-  input:
+  inputvar:
     description: "first input"
     required: false
   secret:
@@ -45,6 +45,8 @@ runs:
       run: |
         echo "${{ inputs.input }}"
         ${{ github.action_path }}/executablescript.sh
+      with:
+        INPUT_INPUTVAR: "${{ inputs.inputvar }}"
     - id: check-conditional-true
       shell: bash
       if: "${{ inputs.secret != '' }}"
