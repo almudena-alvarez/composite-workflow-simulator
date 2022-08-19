@@ -33,7 +33,7 @@ runs:
       run: |
         echo "${{steps.abc.outputs.FAV_NUMBER}}"
         echo "${{steps.abc.outputs.FAV_ANIMAL}}"
-     - id: run-script
+    - id: run-script
       shell: bash
       run: ${{ github.action_path }}/executablescript.sh
 
