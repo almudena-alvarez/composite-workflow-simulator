@@ -11,8 +11,8 @@ description: 'First trial'
 
 # outputs:
 #   chart_name:
-    description: "The name of the packaged Chart"
-    value: ${{ steps.karate.outputs.outputprueba }}
+#     description: "The name of the packaged Chart"
+#     value: ${{ steps.karate.outputs.outputprueba }}
 outputs:
    fav-animal: 
       description: "The name of the packaged Chart"
