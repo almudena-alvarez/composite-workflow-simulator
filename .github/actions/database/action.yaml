@@ -1,13 +1,13 @@
 name: 'Karate first test'
 description: 'First trial'
 
-# inputs:
-#   input:
-#     description: "first input"
-#     required: true
-#   secret:
-#     description: "trying secret"
-#     required: true
+inputs:
+  input:
+    description: "first input"
+    required: false
+  secret:
+    description: "trying secret"
+    required: false
 
 # outputs:
 #   chart_name:
@@ -39,6 +39,14 @@ runs:
         echo "${{steps.abc.outputs.FAV_ANIMAL}}"
     - id: run-script
       shell: bash
+      run: ${{ github.action_path }}/executablescript.sh
+    - id: check-conditional-false
+      shell: bash
+      if: ${{ inputs.input }}
+      run: ${{ github.action_path }}/executablescript.sh
+    - id: check-conditional-true
+      shell: bash
+      if: ${{ inputs.secret }}
       run: ${{ github.action_path }}/executablescript.sh
 
 
