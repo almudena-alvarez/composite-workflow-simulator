@@ -25,6 +25,6 @@ runs:
     run: ${{ github.action_path }}/executablescript.sh
   - id: karatetwo
     shell: bash
-    run: echo ${{ steps.karate.outputs.prueba }}
+    run: echo "${{ steps.karate.outputs.prueba }}"
 
 
