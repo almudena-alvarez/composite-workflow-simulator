@@ -23,7 +23,7 @@ jobs:
       - name: name
         id: test
         shell: bash
-        run: echo "y la variable composite dice asi ${{ steps.id.outputs.chart_name }}"
+        run: echo ${{ steps.id.outputs.chart_name }}
 
   
   
