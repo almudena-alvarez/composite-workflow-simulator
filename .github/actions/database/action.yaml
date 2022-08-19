@@ -42,7 +42,7 @@ runs:
       run: ${{ github.action_path }}/executablescript.sh
     - id: check-conditional-false
       shell: bash
-      if: "${{ inputs.input == '' }}"
+      if: "${{ inputs.input != '' }}"
       run: |
         echo ${{ inputs.input }}
         ${{ github.action_path }}/executablescript.sh
