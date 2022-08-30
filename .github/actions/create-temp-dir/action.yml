@@ -17,8 +17,11 @@ runs:
       shell: bash
       run: |
         cd ${{ github.action_path }}
+        mkdir output
         ls -lart
+        cd output
+        touch foo.bar
     - uses: actions/upload-artifact@v3
        with:
         name: output-archive
-        path: ${{ github.action_path }}
+        path: ./output
