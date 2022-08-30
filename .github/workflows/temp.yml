@@ -9,10 +9,10 @@ jobs:
   trial:
     name: job-name
     runs-on: ubuntu-latest
-    outputs:
-        temp_dir: ${{steps.dir.outputs.temp_dir}}
-        temp_file_suffix: ${{steps.filesuffix.outputs.temp_file}}
-        temp_file: ${{steps.file.outputs.temp_file}}
+#     outputs:
+#         temp_dir: ${{steps.dir.outputs.temp_dir}}
+#         temp_file_suffix: ${{steps.filesuffix.outputs.temp_file}}
+#         temp_file: ${{steps.file.outputs.temp_file}}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
