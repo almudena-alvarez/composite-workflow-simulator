@@ -1,10 +1,10 @@
 name: "Create temp directory"
 description: "Action to create temp directory"
 
-outputs:
-  temp_dir: 
-    description: "Temp directory"
-    value: ${{steps.create-temp-dir.outputs.temp_dir}}
+# outputs:
+#   temp_dir: 
+#     description: "Temp directory"
+#     value: ${{steps.create-temp-dir.outputs.temp_dir}}
 
 runs:
   using: "composite"
