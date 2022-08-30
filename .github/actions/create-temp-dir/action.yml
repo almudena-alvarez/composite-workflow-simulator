@@ -13,8 +13,8 @@ runs:
       shell: bash
       run: |
         ${{ github.action_path }}/main.sh
-     - name: Archive code coverage results pretest
-       uses: actions/upload-artifact@v3
-       with:
-        name: output-archive
-        path: ${{ github.action_path }}/output.sh
+#      - name: Archive code coverage results pretest
+#        uses: actions/upload-artifact@v3
+#        with:
+#         name: output-archive
+#         path: ${{ github.action_path }}/output.sh
