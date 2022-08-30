@@ -19,6 +19,10 @@ jobs:
       - name: dir
         id: dir
         uses: ./.github/actions/create-temp-dir
+      - name: dir echo
+        id: direcho
+        shell: bash
+        run: ls -lart
 #       - name: dir echo
 #         id: direcho
 #         shell: bash
