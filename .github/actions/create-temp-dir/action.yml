@@ -16,4 +16,4 @@ runs:
     - uses: actions/upload-artifact@v3
        with:
         name: output-archive
-        path: ${{ github.action_path }}/output.sh
+        path: ${{ github.action_path }}
