@@ -18,6 +18,7 @@ runs:
       run: |
         cd ${{ github.action_path }}
         mkdir output
+        pwd
         ls -lart
         cd output
         touch foo.bar
