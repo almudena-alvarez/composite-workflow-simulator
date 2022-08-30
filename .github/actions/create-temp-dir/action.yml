@@ -13,7 +13,12 @@ runs:
       shell: bash
       run: |
         ${{ github.action_path }}/main.sh
-    - uses: actions/upload-artifact@v3
-       with:
-        name: output-archive
-        path: ${{ github.action_path }}
+    - id: create-temp-dir2
+      shell: bash
+      run: |
+        cd ${{ github.action_path }}
+        ls -lart
+#     - uses: actions/upload-artifact@v3
+#        with:
+#         name: output-archive
+#         path: ${{ github.action_path }}
