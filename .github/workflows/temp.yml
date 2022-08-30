@@ -1,9 +1,9 @@
 name: composite
 
 on:
-#     push:
-#       branches:
-#       - main
+    push:
+      branches:
+      - main
 
 jobs:
   trial:
@@ -19,31 +19,31 @@ jobs:
       - name: dir
         id: dir
         uses: ./.github/actions/create-temp-dir
-      - name: dir echo
-        id: direcho
-        shell: bash
-        run: echo ${{steps.dir.outputs.temp_dir}}
-      - name: filesuffix
-        id: filesuffix
-        uses: ./.github/actions/create-temp-file
-        with:
-          temp_dir: ${{steps.dir.outputs.temp_dir}}
-          name: "name"
-          file_type: "sql"
-      - name: filesuffix echo
-        id: filesuffixecho
-        shell: bash
-        run: echo ${{steps.filesuffix.outputs.temp_file}}
-      - name: file
-        id: file
-        uses: ./.github/actions/create-temp-file
-        with:
-          temp_dir: ${{steps.dir.outputs.temp_dir}}
-          name: "name"
-      - name: file echo
-        id: fileecho
-        shell: bash
-        run: echo ${{steps.file.outputs.temp_file}}
+#       - name: dir echo
+#         id: direcho
+#         shell: bash
+#         run: echo ${{steps.dir.outputs.temp_dir}}
+#       - name: filesuffix
+#         id: filesuffix
+#         uses: ./.github/actions/create-temp-file
+#         with:
+#           temp_dir: ${{steps.dir.outputs.temp_dir}}
+#           name: "name"
+#           file_type: "sql"
+#       - name: filesuffix echo
+#         id: filesuffixecho
+#         shell: bash
+#         run: echo ${{steps.filesuffix.outputs.temp_file}}
+#       - name: file
+#         id: file
+#         uses: ./.github/actions/create-temp-file
+#         with:
+#           temp_dir: ${{steps.dir.outputs.temp_dir}}
+#           name: "name"
+#       - name: file echo
+#         id: fileecho
+#         shell: bash
+#         run: echo ${{steps.file.outputs.temp_file}}
 
 
   
