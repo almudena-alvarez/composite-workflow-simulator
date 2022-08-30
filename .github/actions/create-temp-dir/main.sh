@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+exec {output}> ./output.sh
 temp_dir=$(mktemp -d /tmp/tmp.XXX)
 
 if [[ ! -d "${temp_dir}" ]]; then
@@ -9,7 +10,9 @@ if [[ ! -d "${temp_dir}" ]]; then
     exit 1
 fi
 
-echo "[INFO] Temporary directory created: '${temp_dir}'"
+echo "${temp_dir}" >${output}
 
-echo "::set-output name=temp_dir::${temp_dir}"
+echo $(pwd)
+
+# echo "::set-output name=temp_dir::${temp_dir}"
 
