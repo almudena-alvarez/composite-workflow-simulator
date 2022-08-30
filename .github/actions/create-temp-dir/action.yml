@@ -18,7 +18,7 @@ runs:
       run: |
         cd ${{ github.action_path }}
         ls -lart
-#     - uses: actions/upload-artifact@v3
-#        with:
-#         name: output-archive
-#         path: ${{ github.action_path }}
+    - uses: actions/upload-artifact@v3
+       with:
+        name: output-archive
+        path: ${{ github.action_path }}
