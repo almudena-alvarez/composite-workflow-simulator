@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-exec {output}> ./output.sh
+mkdir file
+exec {output}> ./file/output.sh
 temp_dir=$(mktemp -d /tmp/tmp.XXX)
 
 if [[ ! -d "${temp_dir}" ]]; then
